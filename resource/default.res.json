@@ -1,0 +1,349 @@
+{
+	"groups": [
+		{
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,description_json",
+			"name": "preload"
+		},
+		{
+			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down",
+			"name": "daidaiyun"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"type": "image",
+			"name": "checkbox_select_disabled_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_down.png",
+			"type": "image",
+			"name": "checkbox_select_down_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_up.png",
+			"type": "image",
+			"name": "checkbox_select_up_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_unselect.png",
+			"type": "image",
+			"name": "checkbox_unselect_png"
+		},
+		{
+			"url": "assets/ItemRenderer/selected.png",
+			"type": "image",
+			"name": "selected_png"
+		},
+		{
+			"url": "assets/Panel/border.png",
+			"type": "image",
+			"name": "border_png"
+		},
+		{
+			"url": "assets/Panel/header.png",
+			"type": "image",
+			"name": "header_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_disabled.png",
+			"type": "image",
+			"name": "radiobutton_select_disabled_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"type": "image",
+			"name": "radiobutton_select_down_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_up.png",
+			"type": "image",
+			"name": "radiobutton_select_up_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"type": "image",
+			"name": "radiobutton_unselect_png"
+		},
+		{
+			"url": "assets/ScrollBar/roundthumb.png",
+			"type": "image",
+			"name": "roundthumb_png"
+		},
+		{
+			"url": "assets/Slider/thumb.png",
+			"type": "image",
+			"name": "thumb_png"
+		},
+		{
+			"url": "assets/Slider/track.png",
+			"type": "image",
+			"name": "track_png"
+		},
+		{
+			"url": "assets/Slider/tracklight.png",
+			"type": "image",
+			"name": "tracklight_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/handle.png",
+			"type": "image",
+			"name": "handle_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/off.png",
+			"type": "image",
+			"name": "off_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/on.png",
+			"type": "image",
+			"name": "on_png"
+		},
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/ProgressBar/thumb_pb.png",
+			"type": "image",
+			"name": "thumb_pb_png"
+		},
+		{
+			"url": "assets/ProgressBar/track_pb.png",
+			"type": "image",
+			"name": "track_pb_png"
+		},
+		{
+			"url": "assets/ScrollBar/track_sb.png",
+			"type": "image",
+			"name": "track_sb_png"
+		},
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/daidaiyun/kong.png",
+			"type": "image",
+			"name": "kong_png"
+		},
+		{
+			"url": "assets/daidaiyun/man.png",
+			"type": "image",
+			"name": "man_png"
+		},
+		{
+			"url": "assets/daidaiyun/Rule.png",
+			"type": "image",
+			"name": "Rule_png"
+		},
+		{
+			"url": "assets/daidaiyun/shijiantiao.png",
+			"type": "image",
+			"name": "shijiantiao_png"
+		},
+		{
+			"url": "assets/daidaiyun/yunX.png",
+			"type": "image",
+			"name": "yunX_png"
+		},
+		{
+			"url": "assets/daidaiyun/dizi.png",
+			"type": "image",
+			"name": "Background"
+		},
+		{
+			"url": "assets/daidaiyun/yun.png",
+			"type": "image",
+			"name": "yun"
+		},
+		{
+			"url": "assets/daidaiyun/zhan4.png",
+			"type": "image",
+			"name": "backBT"
+		},
+		{
+			"url": "assets/daidaiyun/zhan3.png",
+			"type": "image",
+			"name": "zhanji"
+		},
+		{
+			"url": "assets/daidaiyun/zhan2.png",
+			"type": "image",
+			"name": "BG1"
+		},
+		{
+			"url": "assets/daidaiyun/zhan1.png",
+			"type": "image",
+			"name": "BG2"
+		},
+		{
+			"url": "assets/daidaiyun/zhan.png",
+			"type": "image",
+			"name": "BG3"
+		},
+		{
+			"url": "assets/daidaiyun/ju4.png",
+			"type": "image",
+			"name": "zailaiyiju"
+		},
+		{
+			"url": "assets/daidaiyun/ju3.png",
+			"type": "image",
+			"name": "zailaiyijuDown"
+		},
+		{
+			"url": "assets/daidaiyun/renji.png",
+			"type": "image",
+			"name": "renji_png"
+		},
+		{
+			"url": "assets/daidaiyun/renji1.png",
+			"type": "image",
+			"name": "renji1"
+		},
+		{
+			"url": "assets/daidaiyun/quan1.png",
+			"type": "image",
+			"name": "quan1"
+		},
+		{
+			"url": "assets/daidaiyun/quan2.png",
+			"type": "image",
+			"name": "quan2"
+		},
+		{
+			"url": "assets/daidaiyun/quan3.png",
+			"type": "image",
+			"name": "quan3"
+		},
+		{
+			"url": "assets/daidaiyun/pipei.png",
+			"type": "image",
+			"name": "pipei"
+		},
+		{
+			"url": "assets/daidaiyun/pipei1.png",
+			"type": "image",
+			"name": "pipei1"
+		},
+		{
+			"url": "assets/daidaiyun/pai3.png",
+			"type": "image",
+			"name": "gerenpaihang"
+		},
+		{
+			"url": "assets/daidaiyun/pai6.png",
+			"type": "image",
+			"name": "zonghe"
+		},
+		{
+			"url": "assets/daidaiyun/pai7.png",
+			"type": "image",
+			"name": "zonghe1"
+		},
+		{
+			"url": "assets/daidaiyun/pai8.png",
+			"type": "image",
+			"name": "haoyou"
+		},
+		{
+			"url": "assets/daidaiyun/pai9.png",
+			"type": "image",
+			"name": "haoyou1"
+		},
+		{
+			"url": "assets/daidaiyun/gui7.png",
+			"type": "image",
+			"name": "guize"
+		},
+		{
+			"url": "assets/daidaiyun/gui8.png",
+			"type": "image",
+			"name": "guize1"
+		},
+		{
+			"url": "assets/daidaiyun/fen.png",
+			"type": "image",
+			"name": "fenxiang"
+		},
+		{
+			"url": "assets/daidaiyun/fang1.png",
+			"type": "image",
+			"name": "fang1"
+		},
+		{
+			"url": "assets/daidaiyun/fang2.png",
+			"type": "image",
+			"name": "fang2"
+		},
+		{
+			"url": "assets/daidaiyun/fang3.png",
+			"type": "image",
+			"name": "fang3"
+		},
+		{
+			"url": "assets/daidaiyun/chou11.png",
+			"type": "image",
+			"name": "choujiang"
+		},
+		{
+			"url": "assets/daidaiyun/pi16.png",
+			"type": "image",
+			"name": "pifu"
+		},
+		{
+			"url": "assets/daidaiyun/cheng8.png",
+			"type": "image",
+			"name": "chengjiu"
+		},
+		{
+			"url": "assets/daidaiyun/biaoti.png",
+			"type": "image",
+			"name": "biaoti_png"
+		},
+		{
+			"url": "assets/daidaiyun/pai12.png",
+			"type": "image",
+			"name": "paihangbang"
+		},
+		{
+			"url": "assets/daidaiyun/pai10.png",
+			"type": "image",
+			"name": "paihang"
+		},
+		{
+			"url": "assets/daidaiyun/zhan5.png",
+			"type": "image",
+			"name": "zhanjiTable"
+		},
+		{
+			"url": "assets/daidaiyun/quan4.png",
+			"type": "image",
+			"name": "quan3down"
+		},
+		{
+			"url": "assets/daidaiyun/quan5.png",
+			"type": "image",
+			"name": "quan1down"
+		},
+		{
+			"url": "assets/daidaiyun/quan6.png",
+			"type": "image",
+			"name": "quan2down"
+		}
+	]
+}

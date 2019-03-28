@@ -1,0 +1,55 @@
+{
+    "1697ab6993d": {
+        "path": "..\\resource\\Sence\\GamePlay.ts",
+        "class": "GamePlay",
+        "parentPath": ""
+    },
+    "1697b103ae0": {
+        "path": "..\\resource\\Sence\\BeginPage.ts",
+        "class": "BeginPage",
+        "parentPath": ""
+    },
+    "1697b11e28c": {
+        "path": "..\\resource\\Sence\\FriendBeginPage.ts",
+        "class": "FriendBeginPage",
+        "parentPath": ""
+    },
+    "1697b135ee8": {
+        "path": "..\\resource\\Sence\\MachineBeginPage.ts",
+        "class": "MachineBeginPage",
+        "parentPath": ""
+    },
+    "1697b15eb39": {
+        "path": "..\\resource\\Sence\\GamingBeginPage.ts",
+        "class": "GamingBeginPage",
+        "parentPath": ""
+    },
+    "1697b17157f": {
+        "path": "..\\resource\\Sence\\RankPage.ts",
+        "class": "RankPage",
+        "parentPath": ""
+    },
+    "1697b1924b0": {
+        "path": "..\\resource\\Sence\\RecordPage.ts",
+        "class": "RecordPage",
+        "parentPath": ""
+    },
+    "1697b1a574a": {
+        "path": "..\\resource\\Sence\\RulePage.ts",
+        "class": "RulePage",
+        "parentPath": ""
+    },
+    "global": {
+        "globalAdsorbEnable": false,
+        "globalRulerEnable": false,
+        "globalBindingDataTestObj": []
+    },
+    "169b2d9b380": {
+        "bindingDataTestObj": []
+    },
+    "169bdfcffcb": {
+        "path": "..\\resource\\eui_skins\\ListItem.ts",
+        "class": "ListItem",
+        "parentPath": ""
+    }
+}

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GamePlaySkin" width="1080" height="1920" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="1697ab6993d" ></w:Config>
+	<e:Group id="PlayPanel" left="0" right="0" top="0" bottom="0">
+		<e:Image left="3" right="-3" top="0" bottom="2" x="0" y="0" scaleX="1" scaleY="1" anchorOffsetY="0" source="Background"/>
+		<e:Rect width="1080" height="640" x="0" y="1280" anchorOffsetX="0" anchorOffsetY="0" fillColor="0xC9C3C3" fillAlpha="0.5"/>
+		<e:Button id="yunBT" label="" x="390" y="1400" anchorOffsetX="0" width="300" anchorOffsetY="0" height="300">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="yun"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="OneLevelPunch" label="" x="190" y="1350" anchorOffsetX="0" width="250" anchorOffsetY="0" height="100">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="quan1" source.down="quan1down" source.disabled="quan1down"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="TwolevelPunch" label="" x="90" y="1500" width="250" height="100">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="quan2" source.down="quan2down" source.disabled="quan2down"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="ThreeLevelPunch" label="" x="190" y="1650" width="250" height="100">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="quan3" source.down="quan3down" source.disabled="quan3down"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="OneLevelDefense" label="" x="640" y="1350" width="250" height="100">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="fang1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="TwoLevelDefense" label="" x="740" y="1500" width="250" height="100">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="fang2"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="ThreeLevelDefense" label="" x="640" y="1650" width="250" height="100">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="fang3"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Image id="MyHead" width="200" height="200" x="781.88" y="1057.58" anchorOffsetX="0" anchorOffsetY="0" source="bg_jpg"/>
+		<e:Image id="EnemyHead" width="200" height="200" x="87" y="85" source="bg_jpg"/>
+		<e:Group id="EnemyToggleGroup" width="550" height="100" x="325" y="136" anchorOffsetY="0" anchorOffsetX="0">
+		<e:Image id="Eyun0" width="80" height="80" x="35" y="12" source="kong_png"/>
+		<e:Image id="Eyun1" width="80" height="80" x="135" y="12" source="kong_png"/>
+		<e:Image id="Eyun2" width="80" height="80" x="235" y="12" source="kong_png"/>
+		<e:Image id="Eyun3" width="80" height="80" x="335" y="12" source="kong_png"/>
+		<e:Image id="Eyun4" width="80" height="80" x="435" y="12" source="kong_png"/>
+		</e:Group>
+		<e:Group id="MyToggleGroup" width="550" height="100" x="198" y="1111" anchorOffsetY="0" anchorOffsetX="0">
+		<e:Image id="Myun0" width="80" height="80" x="35" y="12" source="kong_png"/>
+		<e:Image id="Myun1" width="80" height="80" x="135" y="12" scaleX="1" scaleY="1" source="kong_png"/>
+		<e:Image id="Myun2" width="80" height="80" x="235" y="12" source="kong_png"/>
+		<e:Image id="Myun3" width="80" height="80" x="335" y="12" source="kong_png"/>
+		<e:Image id="Myun4" width="80" height="80" x="435" y="12" source="kong_png"/>
+		</e:Group>
+		<e:Group id="MyYunShow" width="330" height="100" x="410" y="1111" anchorOffsetY="0" anchorOffsetX="0" visible="false">
+		<e:Image width="200" height="100" x="0" y="0" anchorOffsetX="0" anchorOffsetY="0" source="yunX_png"/>
+		<e:Label id="MyYunLabel" text="99" x="208" y="0" anchorOffsetY="0" height="100" textColor="0x000000" textAlign="center" verticalAlign="middle" anchorOffsetX="0" width="100" size="60"/>
+		</e:Group>
+		<e:Group id="EnemyYunShow" width="330" height="100" x="325" y="136" anchorOffsetY="0" anchorOffsetX="0" visible="false">
+		<e:Image width="200" height="100" x="0" y="0" anchorOffsetX="0" anchorOffsetY="0" source="yunX_png"/>
+		<e:Label id="EnemyYunLabel" text="99" x="208" y="0" anchorOffsetY="0" height="100" textColor="0x000000" textAlign="center" verticalAlign="middle" anchorOffsetX="0" width="100" size="60"/>
+		</e:Group>
+		<e:Label id="MyTouchShow" text="3" x="390" y="821" anchorOffsetX="0" width="280" anchorOffsetY="0" height="372" textAlign="center" verticalAlign="middle" size="130" textColor="0x000000"/>
+		<e:Label id="EnemyTouchShow" text="3" x="390" y="275" anchorOffsetX="0" width="280" anchorOffsetY="0" height="372" textAlign="center" verticalAlign="middle" size="130" textColor="0x000000"/>
+		<e:Image id="TimeImage" width="660" height="100" x="230" y="725" anchorOffsetX="0" anchorOffsetY="0" source="shijiantiao_png"/>
+		<e:Image id="EnemyTime" width="35" height="100" x="230" y="725" anchorOffsetX="0" anchorOffsetY="0" source="man_png"/>
+		<e:Image id="MyTime" width="35" height="100" x="890" y="725" anchorOffsetX="0" anchorOffsetY="0" source="man_png"/>
+		<e:Label id="Bout" text="第X回合" x="65" y="578" anchorOffsetY="0" height="382" anchorOffsetX="0" width="93.78" size="90" textAlign="center"/>
+		<e:Label id="TimeLabel" text="3" x="390" y="578" anchorOffsetX="0" width="280" anchorOffsetY="0" height="372" textAlign="center" verticalAlign="middle" size="200" textColor="0x000000"/>
+		<e:Label id="ScoreTime" text="3" x="390" y="578" anchorOffsetX="0" width="280" anchorOffsetY="0" height="372" textAlign="center" verticalAlign="middle" size="200" textColor="0xFF0000" visible="false"/>
+		<e:Group id="EnemyScore" width="300" height="76" x="82.22" y="303" anchorOffsetX="0" anchorOffsetY="0">
+			<e:Label id="Score6" text="赢" x="18" y="0" width="60" height="60" scaleX="1" scaleY="1" textAlign="center" verticalAlign="middle" size="50"/>
+			<e:Label id="Score5" text="赢" x="128" y="0" width="60" height="60" verticalAlign="middle" textAlign="center" size="50"/>
+			<e:Label id="Score4" text="赢" x="238" y="0" width="60" height="60" scaleX="1" scaleY="1" verticalAlign="middle" textAlign="center" size="50"/>
+		</e:Group>
+		<e:Group id="MyScore" width="300" height="76" x="673.67" y="962.94" anchorOffsetX="0" anchorOffsetY="0">
+		<e:Label id="Score0" text="赢" x="238" y="0" width="60" height="60" scaleX="1" scaleY="1" verticalAlign="middle" textAlign="center" size="50"/>
+		<e:Label id="Score1" text="赢" x="128" y="0" width="60" height="60" verticalAlign="middle" textAlign="center" size="50"/>
+		<e:Label id="Score2" text="赢" x="18" y="0" width="60" height="60" scaleX="1" scaleY="1" textAlign="center" verticalAlign="middle" size="50"/>
+		</e:Group>
+	</e:Group>
+	<e:Group id="OverPanel" left="0" right="0" top="0" bottom="0">
+		<e:Rect strokeColor="0x000000" left="0" right="0" top="0" bottom="0" fillAlpha="0.3"/>
+		<e:Label id="FinalScoreShow" text="你输了!" x="4.7" y="276.45" anchorOffsetY="0" height="341.55" anchorOffsetX="0" width="1075.03" textAlign="center" verticalAlign="middle" size="200" textColor="0x000000"/>
+		<e:Button id="Back" label="" x="415.5" y="1650" scaleX="1" scaleY="1" width="249" height="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="Restart" label="" x="189.7" y="736.82" width="700" height="375" scaleX="1" scaleY="1">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="zailaiyiju" source.down="zailaiyijuDown"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+</e:Skin>

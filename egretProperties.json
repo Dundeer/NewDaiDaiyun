@@ -1,0 +1,40 @@
+{
+  "engineVersion": "5.2.16",
+  "compilerVersion": "5.2.16",
+  "template": {},
+  "target": {
+    "current": "wxgame"
+  },
+  "modules": [
+    {
+      "name": "egret"
+    },
+    {
+      "name": "eui"
+    },
+    {
+      "name": "assetsmanager"
+    },
+    {
+      "name": "tween"
+    },
+    {
+      "name": "game"
+    },
+    {
+      "name": "socket"
+    },
+    {
+      "name": "egretia-sdk"
+    },
+    {
+      "name": "promise"
+    }
+  ],
+  "targets": {
+    "android": {
+      "appname": "daidaiyun",
+      "packagename": "com.dongjihuyu"
+    }
+  }
+}

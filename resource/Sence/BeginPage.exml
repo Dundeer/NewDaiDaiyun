@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BeginPageSkin" width="1080" height="1920" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="169b2d9b380" ></w:Config>
+	<e:Group left="0" right="0" top="0" bottom="0">
+		<e:Image id="bg" left="0" right="0" top="0" bottom="0" x="0" y="0" scaleX="1" scaleY="1" source="Background"/>
+		<e:Image width="845" height="300" x="117.5" y="165" source="biaoti_png" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Button id="VioceBtn" label="音量" x="60" y="96" anchorOffsetX="0" width="60" anchorOffsetY="0" height="52" scaleX="1" scaleY="1" visible="false"/>
+		<e:Button id="AIBtn" label="" x="215" y="500" anchorOffsetX="0" width="650" anchorOffsetY="0" height="280" scaleX="1" scaleY="1">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="renji1" source.down="renji_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="FriBtn" label="好友对战" x="135" y="500" anchorOffsetX="0" width="370" anchorOffsetY="0" height="180" scaleX="1" scaleY="1" visible="false"/>
+		<e:Button id="MatchingBtn" label="" x="215" y="820" anchorOffsetX="0" width="650" anchorOffsetY="0" height="280" scaleX="1" scaleY="1">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="pipei1" source.down="pipei"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="RankBtn" label="" x="150" y="1410" anchorOffsetX="0" width="180" anchorOffsetY="0" height="180" scaleX="1" scaleY="1">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="paihangbang"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="RecordBtn" label="" x="350" y="1410" anchorOffsetX="0" width="180" anchorOffsetY="0" height="180" enabled="true" scaleX="1" scaleY="1">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="zhanjiTable"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="AchieveBtn" label="" x="550" y="1410" width="180" height="180">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="chengjiu"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="RuleBtn" label="" x="750" y="1410" anchorOffsetX="0" width="180" anchorOffsetY="0" height="180" scaleX="1" scaleY="1">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="guize1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="choujiangBT" label="" x="250" y="1610" height="180" width="180">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="choujiang"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="pifuBT" label="" x="450" y="1610" width="180" height="180">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="pifu"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="ShareBtn" label="" x="650" y="1610" anchorOffsetX="0" width="180" anchorOffsetY="0" height="180" scaleX="1" scaleY="1">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="fenxiang"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="Matching" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image left="0" right="0" top="0" bottom="0" x="0" y="0" scaleX="1" scaleY="1" source="BG2"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
+		<e:Button id="MatchingBack" label="" x="415.5" y="1650" anchorOffsetY="0" height="249" anchorOffsetX="0" width="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Label text="正在匹配。。。" x="60.18" y="585" anchorOffsetX="0" width="956" anchorOffsetY="0" height="350" textColor="0x000000" verticalAlign="middle" textAlign="center" size="100"/>
+	</e:Group>
+	<e:Group id="RecordGroup" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image anchorOffsetX="0" left="0" right="0" top="0" bottom="0" anchorOffsetY="0" source="BG2"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
+		<e:Image anchorOffsetX="0" left="35" right="51" top="151" bottom="114" anchorOffsetY="0" source="BG1"/>
+		<e:Image width="1068.79" height="261.06" x="4.88" y="-17.91" anchorOffsetX="0" anchorOffsetY="0" source="zhanji"/>
+		<e:Label text="对战场次：" x="87" y="330" anchorOffsetX="0" width="333.18" anchorOffsetY="0" height="182.13" verticalAlign="middle" textAlign="center" size="60" textColor="0x070707"/>
+		<e:Label id="FireNumber" text="123" x="533.15" y="330" anchorOffsetY="0" height="150" anchorOffsetX="0" width="350" verticalAlign="middle" textAlign="center" size="100" textColor="0x000000"/>
+		<e:Label text="胜率：" x="87" y="600" width="400" height="150" size="100" verticalAlign="middle" textAlign="center" textColor="0x000000"/>
+		<e:Label id="shenglv" text="123123" x="533.15" y="600" width="350" height="150" verticalAlign="middle" textAlign="center" size="100" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Label text="积分：" x="87" y="840" width="400" height="150" size="100" verticalAlign="middle" textAlign="center" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Label id="jifen" text="0" x="533.15" y="840" size="100" verticalAlign="middle" textAlign="center" width="350" height="150" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Button id="RecordBack" label="" x="415.5" y="1650" width="249" height="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
+		<e:Image width="1014.24" height="215.61" x="26.09" y="-7.3" anchorOffsetX="0" anchorOffsetY="0" source="paihang"/>
+		<e:Image width="994.24" height="1117.46" x="42.85" y="315.85" anchorOffsetX="0" anchorOffsetY="0" source="BG1"/>
+		<e:Image width="1000" height="300" x="41.23" y="1410" anchorOffsetX="0" anchorOffsetY="0" source="gerenpaihang"/>
+		<e:Button id="RankBack" label="" x="415.5" y="1650" width="249" height="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Scroller id="AllRankScroller" width="915.15" height="1067.88" x="85.15" y="341.21" anchorOffsetY="0" anchorOffsetX="0" enabled="true">
+			<e:List id="AllRankList" itemRendererSkinName="ListItemSkin" anchorOffsetY="0" height="1067.88" x="0" y="48.48" anchorOffsetX="0" width="930.3">
+				<e:layout>
+					<e:VerticalLayout horizontalAlign="left" verticalAlign="top"/>
+				</e:layout>
+			</e:List>
+		</e:Scroller>
+		<e:Label id="MyRankTable" text="10" x="122.24" y="1465" anchorOffsetY="0" height="200" anchorOffsetX="0" width="200" textColor="0x000000" verticalAlign="middle" textAlign="center" size="50"/>
+		<e:Image id="MyHead" width="200" height="200" x="310" y="1465" source="bg_jpg" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Label id="MyIDLabel" text="Label" x="543.63" y="1465" anchorOffsetX="0" width="200" anchorOffsetY="0" height="200" textColor="0x000000" verticalAlign="middle" textAlign="center" size="35"/>
+		<e:Label id="MyIntegralLable" text="1000" x="758.43" y="1465" width="200" height="200" textColor="0x000000" verticalAlign="middle" textAlign="center" anchorOffsetX="0" anchorOffsetY="0" size="50"/>
+		<e:Button label="" x="155.9" y="165.45" anchorOffsetX="0" width="350" anchorOffsetY="0" height="180">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="zonghe" source.down="zonghe1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button label="" x="545.3" y="171.52" width="350" height="180">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="haoyou" source.down="haoyou1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="Rule" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
+		<e:Image anchorOffsetY="0" left="0" right="0" top="0" bottom="0" anchorOffsetX="0" source="BG3"/>
+		<e:Image anchorOffsetY="0" left="40" right="36" top="175" bottom="112" anchorOffsetX="0" source="BG1"/>
+		<e:Image width="1041.52" height="255" x="20.03" y="-39.12" source="guize" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Scroller width="911.45" height="1388.48" x="89" y="311.34" anchorOffsetX="0" anchorOffsetY="0">
+			<e:Image source="Rule_png"/>
+			
+		</e:Scroller>
+		<e:Button id="RuleBack" label="" x="415.5" y="1650" width="249" height="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+</e:Skin>
