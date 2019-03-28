@@ -30,11 +30,5 @@
     {
       "name": "promise"
     }
-  ],
-  "targets": {
-    "android": {
-      "appname": "daidaiyun",
-      "packagename": "com.dongjihuyu"
-    }
-  }
+  ]
 }

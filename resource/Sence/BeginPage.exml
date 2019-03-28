@@ -112,7 +112,7 @@
 			</e:skinName>
 		</e:Button>
 	</e:Group>
-	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image width="1014.24" height="215.61" x="26.09" y="-7.3" anchorOffsetX="0" anchorOffsetY="0" source="paihang"/>

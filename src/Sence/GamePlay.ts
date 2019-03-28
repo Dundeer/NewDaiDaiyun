@@ -227,11 +227,12 @@ private GamePlaying(){
 	this.playInit();
 	//设置战斗倒计时
 	this.GameTimeNumber = 3;
-	let timer:egret.Timer = new egret.Timer(500,5);
-	timer.addEventListener(egret.TimerEvent.TIMER,
-	this.GameTime,this);
+	// let timer:egret.Timer = new egret.Timer(500,5);
+	// timer.addEventListener(egret.TimerEvent.TIMER,
+	// this.GameTime,this);
 	//战斗倒计时开始
-	timer.start();
+	//timer.start();
+	this.OpenBt();
 	//初始化对局结果
 	this.Result = "";
 	//添加tween动画
@@ -391,15 +392,14 @@ private CloseBt(){
 	this.ThreeLevelDefense.enabled = false;
 }
 //战斗时间事件
-private GameTime(){
-	//每次检测减少时间
-	this.GameTimeNumber -= 0.5;
-	//当时间小于等于0.2时
-	if(this.GameTimeNumber == 0.5){
-		//开启所有按钮
-		this.OpenBt();
-	}
-}
+// private GameTime(){
+// 	//每次检测减少时间
+// 	this.GameTimeNumber -= 0.5;
+// 	//当时间小于等于0.2时
+// 	if(this.GameTimeNumber == 0.5){
+		
+// 	}
+// }
 //倒计时完成
 private timerComplete(){
 	//将遮罩关闭
@@ -712,7 +712,7 @@ private SetResult(){
 		}
 	}else{
 		//执行回合操作	
-		let timer:egret.Timer = new egret.Timer(1000,1);	
+		let timer:egret.Timer = new egret.Timer(2000,1);	
 		timer.addEventListener(egret.TimerEvent.TIMER,	
 		this.delayResult,this); 	
 		timer.start();

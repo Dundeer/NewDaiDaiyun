@@ -2,8 +2,9 @@
 ///<reference path="api.d.ts"/>
 
 import * as path from 'path';
-import { UglifyPlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin, CleanPlugin } from 'built-in';
+import { RenamePlugin, UglifyPlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin, CleanPlugin } from 'built-in';
 import { WxgamePlugin } from './wxgame/wxgame';
+import { SubPackagePlugin } from './wxgame/subpackage';
 import { CustomPlugin } from './myplugin';
 import * as defaultConfig from './config';
 
@@ -17,11 +18,27 @@ const config: ResourceManagerConfig = {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource"] }),
+                    new CleanPlugin({ matchers: ["js", "resource", "sence"] }),
                     new CompilePlugin({ libraryType: "debug", defines: { DEBUG: true, RELEASE: false } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
-                    new ManifestPlugin({ output: 'manifest.js' })
+                    new SubPackagePlugin({
+                        output: 'manifest.js',
+                        subPackages: [
+                            {
+                                root:"sence",
+                                "includes":[
+                                    "BeginPage.js",
+                                    "GamePlay.js"
+                                ]
+                            },{
+                                root: "stage1",
+                                "includes": [
+                                    "main.js"
+                                ]
+                            }
+                        ]
+                    })
                 ]
             }
         }
@@ -29,7 +46,7 @@ const config: ResourceManagerConfig = {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource"] }),
+                    new CleanPlugin({ matchers: ["js", "resource", "sence"] }),
                     new CompilePlugin({ libraryType: "release", defines: { DEBUG: false, RELEASE: true } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
@@ -38,7 +55,24 @@ const config: ResourceManagerConfig = {
                         target: "main.min.js"
                     }
                     ]),
-                    new ManifestPlugin({ output: 'manifest.js' })
+                    new SubPackagePlugin({
+                        output: 'manifest.js',
+                        subPackages: [
+                            {
+                                root:"sence",
+                                "includes":[
+                                    "BeginPage.js",
+                                    "GamePlay.js"
+                                ]
+                            },{
+                                root: "stage1",
+                                "includes": [
+                                   "main.js"
+                                ]
+                            },
+                            
+                        ]
+                    })
                 ]
             }
         }
