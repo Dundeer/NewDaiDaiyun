@@ -81,6 +81,7 @@ class SceneManager extends egret.Sprite {
 		//添加下一个场景
 		this.beginScene = new BeginPage();
 		this.addChild(this[type]);
+		//这么好使吗
 	}
 	
 
