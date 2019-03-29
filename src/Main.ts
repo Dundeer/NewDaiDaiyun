@@ -73,9 +73,10 @@ class Main extends eui.UILayer {
         try {
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
-            await RES.loadConfig("default.res.json", "http://192.168.0.21:8081/resource/");
+            await RES.loadConfig("default.res.json", "http://192.168.0.21:8088/resource/");
             await this.loadTheme();
-            await RES.loadGroup("daidaiyun", 0, loadingView);
+            await RES.loadGroup("preload", 0);
+            await RES.loadGroup("daidaiyun",0,loadingView);
             this.stage.removeChild(loadingView);
         }
         catch (e) {
