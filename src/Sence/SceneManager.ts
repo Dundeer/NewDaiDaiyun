@@ -82,7 +82,5 @@ class SceneManager extends egret.Sprite {
 		this.beginScene = new BeginPage();
 		this.addChild(this[type]);
 	}
-	
-
-	}
+}
 }

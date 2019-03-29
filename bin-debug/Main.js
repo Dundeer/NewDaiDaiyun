@@ -132,7 +132,7 @@ var Main = (function (_super) {
                         return [4 /*yield*/, this.loadTheme()];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
+                        return [4 /*yield*/, RES.loadGroup("daidaiyun", 0, loadingView)];
                     case 3:
                         _a.sent();
                         this.stage.removeChild(loadingView);

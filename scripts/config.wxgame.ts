@@ -2,7 +2,7 @@
 ///<reference path="api.d.ts"/>
 
 import * as path from 'path';
-import { RenamePlugin, UglifyPlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin, CleanPlugin } from 'built-in';
+import { ResSplitPlugin, UglifyPlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin, CleanPlugin } from 'built-in';
 import { WxgamePlugin } from './wxgame/wxgame';
 import { SubPackagePlugin } from './wxgame/subpackage';
 import { CustomPlugin } from './myplugin';
@@ -18,18 +18,24 @@ const config: ResourceManagerConfig = {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource", "sence"] }),
+                    new CleanPlugin({ matchers: ["js", "resource", "sence","stage1"] }),
                     new CompilePlugin({ libraryType: "debug", defines: { DEBUG: true, RELEASE: false } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
+                    new ResSplitPlugin({
+                        matchers:[
+                            {
+                                from:"resource/**",to:'../${projectName}_wxgame_remote'
+                            }
+                        ]
+                    }),
                     new SubPackagePlugin({
                         output: 'manifest.js',
                         subPackages: [
                             {
                                 root:"sence",
                                 "includes":[
-                                    "BeginPage.js",
-                                    "GamePlay.js"
+                                    
                                 ]
                             },{
                                 root: "stage1",
@@ -41,12 +47,11 @@ const config: ResourceManagerConfig = {
                     })
                 ]
             }
-        }
-        else if (command == 'publish') {
+        }else if (command == 'publish') {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource", "sence"] }),
+                    new CleanPlugin({ matchers: ["js", "resource", "sence","stage1"] }),
                     new CompilePlugin({ libraryType: "release", defines: { DEBUG: false, RELEASE: true } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
@@ -55,14 +60,20 @@ const config: ResourceManagerConfig = {
                         target: "main.min.js"
                     }
                     ]),
+                    new ResSplitPlugin({
+                        matchers:[
+                            {
+                                from:"resource/**",to:'../${projectName}_wxgame_remote'
+                            }
+                        ]
+                    }),
                     new SubPackagePlugin({
                         output: 'manifest.js',
                         subPackages: [
                             {
                                 root:"sence",
                                 "includes":[
-                                    "BeginPage.js",
-                                    "GamePlay.js"
+                                    
                                 ]
                             },{
                                 root: "stage1",

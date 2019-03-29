@@ -97,9 +97,8 @@ var GamePlay = (function (_super) {
                 }
                 else {
                     this.EnemyTouch = obj.data;
-                    this.SetYUN(this.EnemyTime, this.EnemyTouch, this.EnemyTouchShow, this.EnemyYun, this.EnemyToggleGroup, this.Eyun, this.EnemyYunShow, this.EnemyYunLabel, "Enemyyun");
                     if (this.MyTouch != "") {
-                        this.GameJudge();
+                        this.SetAllYun();
                     }
                 }
             }
@@ -413,11 +412,19 @@ var GamePlay = (function (_super) {
             //不是人机的话发送招式到服务器
             this.SentSocket(this.MyTouch, "Gaming", "0");
         }
-        this.SetYUN(this.MyTime, this.MyTouch, this.MyTouchShow, this.MyYun, this.MyToggleGroup, this.Myun, this.MyYunShow, this.MyYunLabel, "Myyun");
         //执行回合判断操作
         if (this.EnemyTouch != "") {
-            this.GameJudge();
+            this.SetAllYun();
         }
+    };
+    //设置所有的运
+    GamePlay.prototype.SetAllYun = function () {
+        //设置人物的运
+        this.SetYUN(this.MyTime, this.MyTouch, this.MyTouchShow, this.MyYun, this.MyToggleGroup, this.Myun, this.MyYunShow, this.MyYunLabel, "Myyun");
+        //设置敌人的运
+        this.SetYUN(this.EnemyTime, this.EnemyTouch, this.EnemyTouchShow, this.EnemyYun, this.EnemyToggleGroup, this.Eyun, this.EnemyYunShow, this.EnemyYunLabel, "Enemyyun");
+        //判断胜负	
+        this.GameJudge();
     };
     //根据招式进行操作
     GamePlay.prototype.TouchAndYun = function (str, number, name) {
@@ -542,8 +549,6 @@ var GamePlay = (function (_super) {
         var number = Math.floor(Math.random() * this.AItouch.length);
         //记录出招
         this.EnemyTouch = this.AItouch[number];
-        //出招操作
-        this.SetYUN(this.EnemyTime, this.EnemyTouch, this.EnemyTouchShow, this.EnemyYun, this.EnemyToggleGroup, this.Eyun, this.EnemyYunShow, this.EnemyYunLabel, "Enemyyun");
     };
     //进行判定双方的招式
     GamePlay.prototype.GameJudge = function () {
