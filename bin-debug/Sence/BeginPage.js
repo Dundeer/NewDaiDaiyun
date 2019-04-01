@@ -152,13 +152,15 @@ var BeginPage = (function (_super) {
     BeginPage.prototype.ShowSelfShuju = function (winnumber, timesNubmer, integral) {
         //胜率
         var shenglvNumber = winnumber / timesNubmer;
+        shenglvNumber = Math.floor(shenglvNumber * 100);
         //将战斗场次文字显示
         this.FireNumber.text = timesNubmer.toString();
         if (winnumber == 0) {
             this.shenglv.text = "0%";
         }
         else {
-            this.shenglv.text = (shenglvNumber * 100).toString() + "%";
+            var shenglvwenzi = shenglvNumber.toString();
+            this.shenglv.text = shenglvwenzi + "%";
         }
         //将积分文字显示
         this.jifen.text = integral.toString();
@@ -251,10 +253,13 @@ var BeginPage = (function (_super) {
                         this.let.push(RankData);
                         //打开排行榜面板
                         if (this.CurrentRankNumber == this.AllRankLength) {
+                            //this.AllRankScroller = new eui.Scroller();
                             this.AllRankList = new eui.List();
                             this.AllRankList.dataProvider = new eui.ArrayCollection(this.let);
                             this.AllRankList.itemRenderer = ListItem;
                             this.AllRankScroller.viewport = this.AllRankList;
+                            this.AllRankScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+                            this.AllRankScroller.scrollPolicyV = eui.ScrollPolicy.ON;
                             //this.AllRankList.updateRenderer = this.gameCell.bind(this.let);
                             //this.AllRankList.itemRendererSkinName = ListItem;
                             this.RankingGroup.visible = true;

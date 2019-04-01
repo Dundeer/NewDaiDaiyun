@@ -96,23 +96,25 @@
 		<e:Image anchorOffsetX="0" left="0" right="0" top="0" bottom="0" anchorOffsetY="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image anchorOffsetX="0" left="35" right="51" top="151" bottom="114" anchorOffsetY="0" source="BG1"/>
-		<e:Image width="1068.79" height="261.06" x="4.88" y="-17.91" anchorOffsetX="0" anchorOffsetY="0" source="zhanji"/>
-		<e:Label text="对战场次：" x="87" y="330" anchorOffsetX="0" width="333.18" anchorOffsetY="0" height="182.13" verticalAlign="middle" textAlign="center" size="60" textColor="0x070707"/>
-		<e:Label id="FireNumber" text="123" x="533.15" y="330" anchorOffsetY="0" height="150" anchorOffsetX="0" width="350" verticalAlign="middle" textAlign="center" size="100" textColor="0x000000"/>
-		<e:Label text="胜率：" x="87" y="600" width="400" height="150" size="100" verticalAlign="middle" textAlign="center" textColor="0x000000"/>
-		<e:Label id="shenglv" text="123123" x="533.15" y="600" width="350" height="150" verticalAlign="middle" textAlign="center" size="100" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
-		<e:Label text="积分：" x="87" y="840" width="400" height="150" size="100" verticalAlign="middle" textAlign="center" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
-		<e:Label id="jifen" text="0" x="533.15" y="840" size="100" verticalAlign="middle" textAlign="center" width="350" height="150" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Image width="1040" height="255" x="20" y="-40" anchorOffsetX="0" anchorOffsetY="0" source="zhanji"/>
+		<e:Label text="对战场次：" x="87" y="330" anchorOffsetX="0" width="400" anchorOffsetY="0" height="150" verticalAlign="middle" textAlign="right" size="70" textColor="0x070707" bold="true"/>
+		<e:Label id="FireNumber" text="123" x="533.15" y="330" anchorOffsetY="0" height="150" anchorOffsetX="0" width="350" verticalAlign="middle" textAlign="center" size="70" textColor="0x000000"/>
+		<e:Label text="胜率    ：" x="87" y="570" width="400" height="150" size="70" verticalAlign="middle" textAlign="right" textColor="0x000000" bold="true"/>
+		<e:Label id="shenglv" text="123123" x="533.15" y="570" width="350" height="150" verticalAlign="middle" textAlign="center" size="70" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Label text="积分    ：" x="87" y="810" width="400" height="150" size="70" verticalAlign="middle" textAlign="right" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0" bold="true"/>
+		<e:Label id="jifen" text="0" x="533.15" y="810" size="70" verticalAlign="middle" textAlign="center" width="350" height="150" textColor="0x000000" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Label text="最高排名：" x="87" y="1050" width="400" height="150" textAlign="right" verticalAlign="middle" textColor="0x000000" size="70" bold="true"/>
+		<e:Label id="highest" text="Label" x="533.15" y="1050" width="350" height="150" verticalAlign="middle" textAlign="center" textColor="0x000000" size="70"/>
 		<e:Button id="RecordBack" label="" x="415.5" y="1650" width="249" height="249">
 			<e:skinName>
-				<e:Skin states="up,down,disabled">
+			<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="backBT"/>
 				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
-				</e:Skin>
+			</e:Skin>
 			</e:skinName>
 		</e:Button>
 	</e:Group>
-	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0">
+	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image width="1014.24" height="215.61" x="26.09" y="-7.3" anchorOffsetX="0" anchorOffsetY="0" source="paihang"/>
@@ -129,7 +131,7 @@
 		<e:Scroller id="AllRankScroller" width="915.15" height="1067.88" x="85.15" y="341.21" anchorOffsetY="0" anchorOffsetX="0" enabled="true">
 			<e:List id="AllRankList" itemRendererSkinName="ListItemSkin" anchorOffsetY="0" height="1067.88" x="0" y="48.48" anchorOffsetX="0" width="930.3">
 				<e:layout>
-					<e:VerticalLayout horizontalAlign="left" verticalAlign="top"/>
+					<e:VerticalLayout/>
 				</e:layout>
 			</e:List>
 		</e:Scroller>
@@ -158,12 +160,28 @@
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image anchorOffsetY="0" left="0" right="0" top="0" bottom="0" anchorOffsetX="0" source="BG3"/>
 		<e:Image anchorOffsetY="0" left="40" right="36" top="175" bottom="112" anchorOffsetX="0" source="BG1"/>
-		<e:Image width="1041.52" height="255" x="20.03" y="-39.12" source="guize" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Image width="1040" height="255" x="20" y="-40" source="guize" anchorOffsetX="0" anchorOffsetY="0"/>
 		<e:Scroller width="911.45" height="1388.48" x="89" y="311.34" anchorOffsetX="0" anchorOffsetY="0">
 			<e:Image source="Rule_png"/>
 			
 		</e:Scroller>
 		<e:Button id="RuleBack" label="" x="415.5" y="1650" width="249" height="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="achieveGroup" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
+		<e:Image id="cheng7_png" width="1040" height="255" x="20" y="-40" source="cheng7_png"/>
+		<e:Scroller width="948" height="1448" x="68" y="220" anchorOffsetX="0" anchorOffsetY="0">
+			<e:Group anchorOffsetY="0" height="1448"/>
+		</e:Scroller>
+		<e:Button id="achieveBack" label="" x="415.5" y="1650" width="249" height="249">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="backBT"/>

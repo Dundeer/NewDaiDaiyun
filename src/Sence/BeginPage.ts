@@ -217,6 +217,7 @@ public matching(){
 private ShowSelfShuju(winnumber:number,timesNubmer:number,integral:number){
 	//胜率
 	var shenglvNumber:number = winnumber/timesNubmer;
+	shenglvNumber = Math.floor(shenglvNumber * 100);
 	//将战斗场次文字显示
 	this.FireNumber.text = timesNubmer.toString();
 	if(winnumber == 0)//如果胜场为0，则显示胜率为0%
@@ -225,7 +226,8 @@ private ShowSelfShuju(winnumber:number,timesNubmer:number,integral:number){
 	}
 	else//否则显示计算出的胜率
 	{
-		this.shenglv.text = (shenglvNumber*100).toString()+"%";
+		var shenglvwenzi:string = shenglvNumber.toString();
+		this.shenglv.text = shenglvwenzi +"%";
 	}
 	//将积分文字显示
     this.jifen.text = integral.toString();
@@ -317,10 +319,13 @@ private onReceiveMessage(){
 			this.let.push(RankData);
 			//打开排行榜面板
 			if(this.CurrentRankNumber == this.AllRankLength){
+				//this.AllRankScroller = new eui.Scroller();
 				this.AllRankList = new eui.List();
 				this.AllRankList.dataProvider = new eui.ArrayCollection(this.let);
 				this.AllRankList.itemRenderer = ListItem;
 				this.AllRankScroller.viewport = this.AllRankList;
+				this.AllRankScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+				this.AllRankScroller.scrollPolicyV = eui.ScrollPolicy.ON;
 				//this.AllRankList.updateRenderer = this.gameCell.bind(this.let);
 				//this.AllRankList.itemRendererSkinName = ListItem;
 				this.RankingGroup.visible = true;

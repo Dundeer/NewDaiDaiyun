@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down",
+			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down,cheng3_png,cheng7_png",
 			"name": "daidaiyun"
 		}
 	],
@@ -241,14 +241,24 @@
 			"name": "quan2down"
 		},
 		{
-			"name": "roundthumb_png",
+			"url": "assets/ScrollBar/roundthumb.png",
 			"type": "image",
-			"url": "assets/ScrollBar/roundthumb.png"
+			"name": "roundthumb_png"
 		},
 		{
-			"name": "track_sb_png",
+			"url": "assets/ScrollBar/track_sb.png",
 			"type": "image",
-			"url": "assets/ScrollBar/track_sb.png"
+			"name": "track_sb_png"
+		},
+		{
+			"url": "assets/daidaiyun/cheng3.png",
+			"type": "image",
+			"name": "cheng3_png"
+		},
+		{
+			"url": "assets/daidaiyun/cheng7.png",
+			"type": "image",
+			"name": "cheng7_png"
 		}
 	]
 }
