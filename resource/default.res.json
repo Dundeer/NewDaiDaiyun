@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down,cheng3_png,cheng7_png",
+			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down,cheng3_png,cheng7_png,chou4_png,chou5_png,chou6_png,chou7_png,chou8_png,fang4_png,fang5_png,fang6_png,pi6_png,pi7_png,pi8_png,pi9_png,pi10_png,pi14_png",
 			"name": "daidaiyun"
 		}
 	],
@@ -259,6 +259,76 @@
 			"url": "assets/daidaiyun/cheng7.png",
 			"type": "image",
 			"name": "cheng7_png"
+		},
+		{
+			"url": "assets/daidaiyun/chou4.png",
+			"type": "image",
+			"name": "chou4_png"
+		},
+		{
+			"url": "assets/daidaiyun/chou5.png",
+			"type": "image",
+			"name": "chou5_png"
+		},
+		{
+			"url": "assets/daidaiyun/chou6.png",
+			"type": "image",
+			"name": "chou6_png"
+		},
+		{
+			"url": "assets/daidaiyun/chou7.png",
+			"type": "image",
+			"name": "chou7_png"
+		},
+		{
+			"url": "assets/daidaiyun/chou8.png",
+			"type": "image",
+			"name": "chou8_png"
+		},
+		{
+			"url": "assets/daidaiyun/fang4.png",
+			"type": "image",
+			"name": "fang4_png"
+		},
+		{
+			"url": "assets/daidaiyun/fang5.png",
+			"type": "image",
+			"name": "fang5_png"
+		},
+		{
+			"url": "assets/daidaiyun/fang6.png",
+			"type": "image",
+			"name": "fang6_png"
+		},
+		{
+			"url": "assets/daidaiyun/pi6.png",
+			"type": "image",
+			"name": "pi6_png"
+		},
+		{
+			"url": "assets/daidaiyun/pi7.png",
+			"type": "image",
+			"name": "pi7_png"
+		},
+		{
+			"url": "assets/daidaiyun/pi8.png",
+			"type": "image",
+			"name": "pi8_png"
+		},
+		{
+			"url": "assets/daidaiyun/pi9.png",
+			"type": "image",
+			"name": "pi9_png"
+		},
+		{
+			"url": "assets/daidaiyun/pi10.png",
+			"type": "image",
+			"name": "pi10_png"
+		},
+		{
+			"url": "assets/daidaiyun/pi14.png",
+			"type": "image",
+			"name": "pi14_png"
 		}
 	]
 }

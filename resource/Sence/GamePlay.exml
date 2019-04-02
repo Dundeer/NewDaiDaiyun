@@ -39,7 +39,7 @@
 		<e:Button id="OneLevelDefense" label="" x="640" y="1350" width="250" height="100">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
-				<e:Image width="100%" height="100%" source="fang1"/>
+				<e:Image width="100%" height="100%" source="fang1" source.down="fang5_png" source.disabled="fang5_png"/>
 				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
 				</e:Skin>
 			</e:skinName>
@@ -47,7 +47,7 @@
 		<e:Button id="TwoLevelDefense" label="" x="740" y="1500" width="250" height="100">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
-				<e:Image width="100%" height="100%" source="fang2"/>
+				<e:Image width="100%" height="100%" source="fang2" source.down="fang4_png" source.disabled="fang4_png"/>
 				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
 				</e:Skin>
 			</e:skinName>
@@ -55,7 +55,7 @@
 		<e:Button id="ThreeLevelDefense" label="" x="640" y="1650" width="250" height="100">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
-				<e:Image width="100%" height="100%" source="fang3"/>
+				<e:Image width="100%" height="100%" source="fang3" source.down="fang6_png" source.disabled="fang6_png"/>
 				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
 				</e:Skin>
 			</e:skinName>
@@ -105,7 +105,7 @@
 	</e:Group>
 	<e:Group id="OverPanel" left="0" right="0" top="0" bottom="0">
 		<e:Rect strokeColor="0x000000" left="0" right="0" top="0" bottom="0" fillAlpha="0.3"/>
-		<e:Label id="FinalScoreShow" text="你输了!" x="4.7" y="276.45" anchorOffsetY="0" height="341.55" anchorOffsetX="0" width="1075.03" textAlign="center" verticalAlign="middle" size="200" textColor="0x000000"/>
+		<e:Label id="FinalScoreShow" text="你输了!" x="4.7" y="276.45" anchorOffsetY="0" height="341.55" anchorOffsetX="0" width="1075.03" textAlign="center" verticalAlign="middle" size="200" textColor="0xff0000"/>
 		<e:Button id="Back" label="" x="415.5" y="1650" scaleX="1" scaleY="1" width="249" height="249">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">

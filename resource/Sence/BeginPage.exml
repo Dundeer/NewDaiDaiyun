@@ -96,7 +96,7 @@
 		<e:Image anchorOffsetX="0" left="0" right="0" top="0" bottom="0" anchorOffsetY="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image anchorOffsetX="0" left="35" right="51" top="151" bottom="114" anchorOffsetY="0" source="BG1"/>
-		<e:Image width="1040" height="255" x="20" y="-40" anchorOffsetX="0" anchorOffsetY="0" source="zhanji"/>
+		<e:Image width="600" height="180" x="240" y="-20" anchorOffsetX="0" anchorOffsetY="0" source="zhanji"/>
 		<e:Label text="对战场次：" x="87" y="330" anchorOffsetX="0" width="400" anchorOffsetY="0" height="150" verticalAlign="middle" textAlign="right" size="70" textColor="0x070707" bold="true"/>
 		<e:Label id="FireNumber" text="123" x="533.15" y="330" anchorOffsetY="0" height="150" anchorOffsetX="0" width="350" verticalAlign="middle" textAlign="center" size="70" textColor="0x000000"/>
 		<e:Label text="胜率    ：" x="87" y="570" width="400" height="150" size="70" verticalAlign="middle" textAlign="right" textColor="0x000000" bold="true"/>
@@ -117,7 +117,7 @@
 	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
-		<e:Image width="1014.24" height="215.61" x="26.09" y="-7.3" anchorOffsetX="0" anchorOffsetY="0" source="paihang"/>
+		<e:Image width="600" height="180" x="240" y="-20" anchorOffsetX="0" anchorOffsetY="0" source="paihang"/>
 		<e:Image width="994.24" height="1117.46" x="42.85" y="315.85" anchorOffsetX="0" anchorOffsetY="0" source="BG1"/>
 		<e:Image width="1000" height="300" x="41.23" y="1410" anchorOffsetX="0" anchorOffsetY="0" source="gerenpaihang"/>
 		<e:Button id="RankBack" label="" x="415.5" y="1650" width="249" height="249">
@@ -160,7 +160,7 @@
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image anchorOffsetY="0" left="0" right="0" top="0" bottom="0" anchorOffsetX="0" source="BG3"/>
 		<e:Image anchorOffsetY="0" left="40" right="36" top="175" bottom="112" anchorOffsetX="0" source="BG1"/>
-		<e:Image width="1040" height="255" x="20" y="-40" source="guize" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Image width="600" height="180" x="240" y="-20" source="guize" anchorOffsetX="0" anchorOffsetY="0"/>
 		<e:Scroller width="911.45" height="1388.48" x="89" y="311.34" anchorOffsetX="0" anchorOffsetY="0">
 			<e:Image source="Rule_png"/>
 			
@@ -177,14 +177,201 @@
 	<e:Group id="achieveGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
-		<e:Image id="cheng7_png" width="1040" height="255" x="20" y="-40" source="cheng7_png"/>
+		<e:Image width="600" height="180" x="240" y="-20" source="cheng7_png"/>
 		<e:Scroller width="948" height="1448" x="68" y="220" anchorOffsetX="0" anchorOffsetY="0">
-			<e:Group anchorOffsetY="0" height="1448"/>
+			<e:Group anchorOffsetY="0" height="1448">
+			</e:Group>
 		</e:Scroller>
 		<e:Button id="achieveBack" label="" x="415.5" y="1650" width="249" height="249">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="AwardGroup" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
+		<e:Image width="600" height="180" x="240" y="-20" source="chou8_png" anchorOffsetY="0" anchorOffsetX="0"/>
+		<e:Button id="AwardBack" label="" x="415.5" y="1650" width="249" height="249">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Image width="1000" height="1328" x="40" y="220" anchorOffsetX="0" anchorOffsetY="0" source="chou5_png"/>
+		<e:Image width="860" height="1228" x="108" y="264" anchorOffsetX="0" anchorOffsetY="0" source="chou6_png"/>
+		<e:Group width="795" height="1160" x="140" y="288" anchorOffsetX="0" anchorOffsetY="0">
+			<e:Button label="" x="33" y="0" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="286" y="0" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="539" y="0" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="33" y="230" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="286" y="230" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="539" y="230" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="33" y="460" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="286" y="460" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="539" y="460" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="33" y="690" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="286" y="690" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="539" y="690" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="33" y="920" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="286" y="920" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Button label="" x="539" y="920" width="220" height="220">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chou7_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:layout>
+				<e:BasicLayout/>
+			</e:layout>
+		</e:Group>
+		<e:Button id="ChangedBox" label="" x="340" y="1504" anchorOffsetX="0" width="400" anchorOffsetY="0" height="180">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="chou4_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="SkinGroup" left="0" right="0" top="0" bottom="0" visible="false">
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
+		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
+		<e:Image width="600" height="180" x="240" y="-20" source="pi6_png"/>
+		<e:Image width="952" height="1244" x="56" y="240" anchorOffsetX="0" anchorOffsetY="0" source="BG1"/>
+		<e:Button label="" x="172" y="152" anchorOffsetX="0" width="300" anchorOffsetY="0" height="180">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="pi9_png" source.down="pi10_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button label="" x="570" y="152" width="300" height="180">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="pi7_png" source.down="pi8_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="SkinBack" label="" x="415.5" y="1650" width="249" height="249">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="backBT"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button label="Button" x="332" y="1468" anchorOffsetX="0" width="400" anchorOffsetY="0" height="200">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="pi14_png"/>
 				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
 				</e:Skin>
 			</e:skinName>

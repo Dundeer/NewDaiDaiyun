@@ -50,6 +50,26 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	public AllRankList:eui.List;
 	//滚动条
 	public AllRankScroller:eui.Scroller;
+	//抽奖按钮
+	public choujiangBT:eui.Button;
+	//皮肤按钮
+	public pifuBT:eui.Button;
+	//最高排位文字
+	public highest:eui.Label;
+	//成就列表
+	public achieveGroup:eui.Group;
+	//成就返回按钮
+	public achieveBack:eui.Button;
+	//抽奖列表
+	public AwardGroup:eui.Group;
+	//抽奖返回
+	public AwardBack:eui.Button;
+	//换一盒按钮
+	public ChangedBox:eui.Button;
+	//皮肤列表
+	public SkinGroup:eui.Group;
+	//皮肤返回按钮
+	public SkinBack:eui.Button;
 
 
 	//发送信息时使用的id
@@ -238,6 +258,18 @@ private ShowSelfRank(rank:number,id:string,integral:number){
 	this.MyIDLabel.text = id;
 	this.MyIntegralLable.text = integral.toString();
 }
+//设置排行榜的列表
+private SetRankList(){
+	//this.AllRankScroller = new eui.Scroller();			
+	this.AllRankList = new eui.List();
+	this.AllRankList.dataProvider = new eui.ArrayCollection(this.let);
+	this.AllRankList.itemRenderer = ListItem;
+	this.AllRankScroller.viewport = this.AllRankList;
+	this.AllRankScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+	this.AllRankScroller.scrollPolicyV = eui.ScrollPolicy.ON;
+	//this.AllRankList.updateRenderer = this.gameCell.bind(this.let);
+	//this.AllRankList.itemRendererSkinName = ListItem;
+}
 //发送信息到服务端
 private Sendsocket(type:string,start:string){
 	var cmd = '{"id":"'+this.id+'","type":"'+type+'","start":"'+start+'"}';
@@ -319,15 +351,7 @@ private onReceiveMessage(){
 			this.let.push(RankData);
 			//打开排行榜面板
 			if(this.CurrentRankNumber == this.AllRankLength){
-				//this.AllRankScroller = new eui.Scroller();
-				this.AllRankList = new eui.List();
-				this.AllRankList.dataProvider = new eui.ArrayCollection(this.let);
-				this.AllRankList.itemRenderer = ListItem;
-				this.AllRankScroller.viewport = this.AllRankList;
-				this.AllRankScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
-				this.AllRankScroller.scrollPolicyV = eui.ScrollPolicy.ON;
-				//this.AllRankList.updateRenderer = this.gameCell.bind(this.let);
-				//this.AllRankList.itemRendererSkinName = ListItem;
+				this.SetRankList();
 				this.RankingGroup.visible = true;
 			}
 			break;
@@ -336,8 +360,8 @@ private onReceiveMessage(){
 	}catch(e){
 		console.log(e);
 	}
-	}	
-
+}	
+//修改item内容
 private gameCell(renderer: eui.IItemRenderer, itemIndex: number, data: any) : eui.IItemRenderer{
    renderer.data = data;
    renderer.itemIndex = itemIndex;
