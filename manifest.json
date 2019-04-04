@@ -11,6 +11,7 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/AchieveItemRender.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/ListItem.js",
 		"bin-debug/LoadingUI.js",

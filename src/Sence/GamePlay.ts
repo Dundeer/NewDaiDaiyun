@@ -55,6 +55,7 @@ class GamePlay extends eui.Component implements  eui.UIComponent {
 	private CurrentGame:number = 0;//当前时第几局
 	private CurrentPing:number = 0;//当前平的局数
 	private isAI:boolean = false;//是否时人机对战
+	private defense:number = 0;
 
 	public constructor() {
 		super();
@@ -81,7 +82,7 @@ private RestartBT(){
 		this.init();
 	}else{
 		SceneManager.instance().isRestart = true;
-		this.SentSocket("0","Quit","0");
+		this.SentSocket("0","Quit","0",0);
 	}
 }
 //返回按钮	
@@ -91,7 +92,7 @@ private BackHome(){
 		SceneManager.instance().changeScene("beginScene");
 	}else{
 		SceneManager.instance().isRestart = false;
-		this.SentSocket("0","Quit","0");
+		this.SentSocket("0","Quit","0",0);
 	}
 }
 //网络监听
@@ -114,7 +115,7 @@ private onReceiveMessage(){
 				SceneManager.instance().changeScene('beginScene');
 			}else if(obj.message == "对方退出"){
 				if(this.CurrentGame <= 3){	
-					this.SentSocket("0","Selfshuju","ying");					
+					this.SentSocket("0","Selfshuju","ying",this.defense);					
 				}
 			}else{
 				this.EnemyTouch = obj.data;	
@@ -129,9 +130,9 @@ private onReceiveMessage(){
 	}
 }
 //发送网络信息
-private SentSocket(touch:string,type:string,start:string){
+private SentSocket(touch:string,type:string,start:string,defense:number){
 	var id = SceneManager.instance().myid;
-	var cmd = '{"id":"'+id+'","type":"'+type+'","play":"' + touch + '","start":"'+start+'"}';
+	var cmd = '{"id":"'+id+'","type":"'+type+'","play":"' + touch + '","start":"'+start+'","def":"'+defense+'"}';
 	SceneManager.instance().webSocket.writeUTF(cmd);
 }
 //初始化
@@ -155,6 +156,8 @@ private init(){
 	this.initGroup();
 	//对一些公用项目初始化
 	this.Allinit();
+	//初始化成功防御的次数
+	this.defense = 0;
 }
 //通用项目初始化
 private Allinit(){
@@ -450,7 +453,7 @@ private SetMyYun(){
 		this.AIout();
 	}else{
 		//不是人机的话发送招式到服务器
-		this.SentSocket(this.MyTouch,"Gaming","0");
+		this.SentSocket(this.MyTouch,"Gaming","0",0);
 	}
 	//执行回合判断操作
 	if(this.EnemyTouch != ""){
@@ -612,6 +615,8 @@ private GameJudge(){
 		}else {
 			//平了
 			this.Result = "Pingle";
+			//增加防御成功的次数
+			this.defense++;
 		}
 	}else if(this.MyTouch == "defense2"){
 		if(this.EnemyTouch == "Punch1"
@@ -621,6 +626,8 @@ private GameJudge(){
 		}else {
 			//平了
 			this.Result = "Pingle";
+			//增加防御成功的次数
+			this.defense++;
 		}
 	}else if(this.MyTouch == "defense3"){
 		if(this.EnemyTouch == "Punch2"
@@ -630,6 +637,8 @@ private GameJudge(){
 		}else {
 			//平了
 			this.Result = "Pingle";
+			//增加防御成功的次数
+			this.defense++;
 		}
 	}else if(this.MyTouch == "Punch1"){
 		if(this.EnemyTouch == "Punch2"
@@ -699,20 +708,19 @@ private SetResult(){
 		if(this.isAI){
 			this.setScoreText("你赢了！");
 		}else{
-			this.SentSocket("0","Selfshuju","ying");
+			this.SentSocket("0","Selfshuju","ying",this.defense);
 		}
 	}else if(this.CurrentLose == 2){
 		if(this.isAI){
 			this.setScoreText("你输了！");
 		}else{
-			this.SentSocket("0","Selfshuju","shu");
+			this.SentSocket("0","Selfshuju","shu",this.defense);
 		}
-		
 	}else if(this.CurrentPing == 2){
 		if(this.isAI){
 			this.setScoreText("平了！");
 		}else{
-			this.SentSocket("0","Selfshuju","ping");
+			this.SentSocket("0","Selfshuju","ping",this.defense);
 		}
 	}else{
 		//执行回合操作	

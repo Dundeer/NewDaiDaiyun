@@ -178,9 +178,9 @@
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image width="600" height="180" x="240" y="-20" source="cheng7_png"/>
-		<e:Scroller width="948" height="1448" x="68" y="220" anchorOffsetX="0" anchorOffsetY="0">
-			<e:Group anchorOffsetY="0" height="1448">
-			</e:Group>
+		<e:Image width="953.33" height="1486.66" x="57.73" y="178.61" anchorOffsetX="0" anchorOffsetY="0" source="BG1"/>
+		<e:Scroller id="AchieveScroller" width="878.31" height="1411.63" x="95.27" y="220" anchorOffsetX="0" anchorOffsetY="0">
+			<e:List id="AchieveList" height="1408.61"/>
 		</e:Scroller>
 		<e:Button id="achieveBack" label="" x="415.5" y="1650" width="249" height="249">
 			<e:skinName>

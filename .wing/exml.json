@@ -51,5 +51,10 @@
         "path": "..\\resource\\eui_skins\\ListItem.ts",
         "class": "ListItem",
         "parentPath": ""
+    },
+    "169e15785bf": {
+        "path": "..\\resource\\eui_skins\\AchieveItemRender.ts",
+        "class": "AchieveItemRender",
+        "parentPath": ""
     }
 }

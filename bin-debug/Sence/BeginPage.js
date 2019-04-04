@@ -20,6 +20,10 @@ var BeginPage = (function (_super) {
         _this.AllRankLength = 0;
         //防止排行数据的数组
         _this.let = [];
+        //放置成就数据的数组
+        _this.AchieveG = [];
+        //发送过来的成就的数据的长度
+        _this.AllAchieveLength = 0;
         return _this;
     }
     BeginPage.prototype.partAdded = function (partName, instance) {
@@ -35,6 +39,8 @@ var BeginPage = (function (_super) {
         this.AddEvent();
         //获取用户id
         this.id = SceneManager.instance().myid;
+        //关闭成就面板
+        this.CloseAchieve();
         //初始化规则面板
         this.CloseRule();
         //初始化战绩面板
@@ -52,6 +58,10 @@ var BeginPage = (function (_super) {
     };
     //添加的所有事件
     BeginPage.prototype.AddEvent = function () {
+        //成就列表返回按钮
+        this.achieveBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseAchieve, this);
+        //成就按钮
+        this.AchieveBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAchieve, this);
         //排行榜返回按钮
         this.RankBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseRank, this);
         //排行榜按钮
@@ -75,6 +85,12 @@ var BeginPage = (function (_super) {
     };
     //移除所有事件
     BeginPage.prototype.RemoveEvent = function () {
+        if (this.achieveBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.achieveBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseAchieve, this);
+        }
+        if (this.AchieveBtn.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.AchieveBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAchieve, this);
+        }
         if (this.RuleBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
             this.RuleBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseRule, this);
         }
@@ -99,6 +115,16 @@ var BeginPage = (function (_super) {
         if (SceneManager.instance().webSocket.hasEventListener(egret.ProgressEvent.SOCKET_DATA)) {
             SceneManager.instance().webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this);
         }
+    };
+    //关闭成就
+    BeginPage.prototype.CloseAchieve = function () {
+        this.AchieveG.splice(0, this.AchieveG.length);
+        this.AllAchieveLength = 0;
+        this.achieveGroup.visible = false;
+    };
+    //开启成就
+    BeginPage.prototype.OpenAchieve = function () {
+        this.Sendsocket("Achieve", "get");
     };
     //关闭排行榜
     BeginPage.prototype.CloseRank = function () {
@@ -170,6 +196,50 @@ var BeginPage = (function (_super) {
         this.MyRankTable.text = rank.toString();
         this.MyIDLabel.text = id;
         this.MyIntegralLable.text = integral.toString();
+    };
+    //设置排行榜的列表
+    BeginPage.prototype.SetRankList = function () {
+        //this.AllRankScroller = new eui.Scroller();
+        if (this.AllRankList.dataProvider) {
+            this.AllRankAchieveArrayColl.source = this.let;
+            this.AllRankAchieveArrayColl.refresh();
+            this.AllRankList.dataProviderRefreshed();
+        }
+        else {
+            this.AllRankList = new eui.List();
+            this.AllRankAchieveArrayColl = new eui.ArrayCollection(this.let);
+            this.AllRankList.dataProvider = this.AllRankAchieveArrayColl;
+            this.AllRankList.itemRenderer = ListItem;
+            this.AllRankScroller.viewport = this.AllRankList;
+            this.AllRankScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+            this.AllRankScroller.scrollPolicyV = eui.ScrollPolicy.ON;
+        }
+        //this.AllRankList.updateRenderer = this.gameCell.bind(this.let);
+        //this.AllRankList.itemRendererSkinName = ListItem;
+    };
+    //设置成就列表
+    BeginPage.prototype.SetAchieveList = function () {
+        var Aarray = new Array();
+        Aarray = this.AchieveG;
+        if (this.AchieveList.dataProvider) {
+            //this.AchieveArrayColl.source = Aarray;
+            //this.AchieveArrayColl.refresh();
+            //this.AchieveArrayColl.source = null;
+            //console.log(this.AchieveArrayColl.source.length);
+            this.AchieveList.dataProvider = new eui.ArrayCollection(Aarray);
+            this.AchieveList.dataProviderRefreshed();
+            console.log(this.AchieveList.dataProvider);
+        }
+        else {
+            console.log("创建成就列表");
+            this.AchieveList = new eui.List();
+            this.AchieveArrayColl = new eui.ArrayCollection(this.AchieveG);
+            this.AchieveList.dataProvider = this.AchieveArrayColl;
+            this.AchieveList.itemRenderer = AchieveItemRender;
+            this.AchieveScroller.viewport = this.AchieveList;
+            this.AchieveScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+            this.AchieveScroller.scrollPolicyV = eui.ScrollPolicy.ON;
+        }
     };
     //发送信息到服务端
     BeginPage.prototype.Sendsocket = function (type, start) {
@@ -253,17 +323,24 @@ var BeginPage = (function (_super) {
                         this.let.push(RankData);
                         //打开排行榜面板
                         if (this.CurrentRankNumber == this.AllRankLength) {
-                            //this.AllRankScroller = new eui.Scroller();
-                            this.AllRankList = new eui.List();
-                            this.AllRankList.dataProvider = new eui.ArrayCollection(this.let);
-                            this.AllRankList.itemRenderer = ListItem;
-                            this.AllRankScroller.viewport = this.AllRankList;
-                            this.AllRankScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
-                            this.AllRankScroller.scrollPolicyV = eui.ScrollPolicy.ON;
-                            //this.AllRankList.updateRenderer = this.gameCell.bind(this.let);
-                            //this.AllRankList.itemRendererSkinName = ListItem;
+                            this.SetRankList();
                             this.RankingGroup.visible = true;
                         }
+                        break;
+                    case "成就内容":
+                        var AchieveData = obj.data;
+                        if (this.AllAchieveLength == 0) {
+                            this.AllAchieveLength = obj.status;
+                        }
+                        this.AchieveG.push(obj.data);
+                        if (this.AchieveG.length == this.AllAchieveLength) {
+                            this.SetAchieveList();
+                            this.achieveGroup.visible = true;
+                        }
+                        break;
+                    case "成就修改":
+                        this.CloseAchieve();
+                        this.Sendsocket("Achieve", "get");
                         break;
                 }
             }
@@ -272,6 +349,7 @@ var BeginPage = (function (_super) {
             console.log(e);
         }
     };
+    //修改item内容
     BeginPage.prototype.gameCell = function (renderer, itemIndex, data) {
         renderer.data = data;
         renderer.itemIndex = itemIndex;

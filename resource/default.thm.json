@@ -21,10 +21,12 @@
 		"RankPage": "resource/Sence/RankPage.exml",
 		"RecordPage": "resource/Sence/RecordPage.exml",
 		"RulePage": "resource/Sence/RulePage.exml",
-		"ListItem": "resource/eui_skins/ListItem.exml"
+		"ListItem": "resource/eui_skins/ListItem.exml",
+		"AchieveItemRender": "resource/eui_skins/AchieveItemRender.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
+		"resource/eui_skins/AchieveItemRender.exml",
 		"resource/eui_skins/ButtonSkin.exml",
 		"resource/eui_skins/CheckBoxSkin.exml",
 		"resource/eui_skins/HScrollBarSkin.exml",

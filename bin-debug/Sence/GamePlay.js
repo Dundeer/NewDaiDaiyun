@@ -35,6 +35,7 @@ var GamePlay = (function (_super) {
         _this.CurrentGame = 0; //当前时第几局
         _this.CurrentPing = 0; //当前平的局数
         _this.isAI = false; //是否时人机对战
+        _this.defense = 0;
         return _this;
     }
     GamePlay.prototype.partAdded = function (partName, instance) {
@@ -54,7 +55,7 @@ var GamePlay = (function (_super) {
         }
         else {
             SceneManager.instance().isRestart = true;
-            this.SentSocket("0", "Quit", "0");
+            this.SentSocket("0", "Quit", "0", 0);
         }
     };
     //返回按钮	
@@ -65,7 +66,7 @@ var GamePlay = (function (_super) {
         }
         else {
             SceneManager.instance().isRestart = false;
-            this.SentSocket("0", "Quit", "0");
+            this.SentSocket("0", "Quit", "0", 0);
         }
     };
     //网络监听
@@ -92,7 +93,7 @@ var GamePlay = (function (_super) {
                 }
                 else if (obj.message == "对方退出") {
                     if (this.CurrentGame <= 3) {
-                        this.SentSocket("0", "Selfshuju", "ying");
+                        this.SentSocket("0", "Selfshuju", "ying", this.defense);
                     }
                 }
                 else {
@@ -108,9 +109,9 @@ var GamePlay = (function (_super) {
         }
     };
     //发送网络信息
-    GamePlay.prototype.SentSocket = function (touch, type, start) {
+    GamePlay.prototype.SentSocket = function (touch, type, start, defense) {
         var id = SceneManager.instance().myid;
-        var cmd = '{"id":"' + id + '","type":"' + type + '","play":"' + touch + '","start":"' + start + '"}';
+        var cmd = '{"id":"' + id + '","type":"' + type + '","play":"' + touch + '","start":"' + start + '","def":"' + defense + '"}';
         SceneManager.instance().webSocket.writeUTF(cmd);
     };
     //初始化
@@ -133,6 +134,8 @@ var GamePlay = (function (_super) {
         this.initGroup();
         //对一些公用项目初始化
         this.Allinit();
+        //初始化成功防御的次数
+        this.defense = 0;
     };
     //通用项目初始化
     GamePlay.prototype.Allinit = function () {
@@ -410,7 +413,7 @@ var GamePlay = (function (_super) {
         }
         else {
             //不是人机的话发送招式到服务器
-            this.SentSocket(this.MyTouch, "Gaming", "0");
+            this.SentSocket(this.MyTouch, "Gaming", "0", 0);
         }
         //执行回合判断操作
         if (this.EnemyTouch != "") {
@@ -573,6 +576,8 @@ var GamePlay = (function (_super) {
             else {
                 //平了
                 this.Result = "Pingle";
+                //增加防御成功的次数
+                this.defense++;
             }
         }
         else if (this.MyTouch == "defense2") {
@@ -584,6 +589,8 @@ var GamePlay = (function (_super) {
             else {
                 //平了
                 this.Result = "Pingle";
+                //增加防御成功的次数
+                this.defense++;
             }
         }
         else if (this.MyTouch == "defense3") {
@@ -595,6 +602,8 @@ var GamePlay = (function (_super) {
             else {
                 //平了
                 this.Result = "Pingle";
+                //增加防御成功的次数
+                this.defense++;
             }
         }
         else if (this.MyTouch == "Punch1") {
@@ -665,7 +674,7 @@ var GamePlay = (function (_super) {
                 this.setScoreText("你赢了！");
             }
             else {
-                this.SentSocket("0", "Selfshuju", "ying");
+                this.SentSocket("0", "Selfshuju", "ying", this.defense);
             }
         }
         else if (this.CurrentLose == 2) {
@@ -673,7 +682,7 @@ var GamePlay = (function (_super) {
                 this.setScoreText("你输了！");
             }
             else {
-                this.SentSocket("0", "Selfshuju", "shu");
+                this.SentSocket("0", "Selfshuju", "shu", this.defense);
             }
         }
         else if (this.CurrentPing == 2) {
@@ -681,7 +690,7 @@ var GamePlay = (function (_super) {
                 this.setScoreText("平了！");
             }
             else {
-                this.SentSocket("0", "Selfshuju", "ping");
+                this.SentSocket("0", "Selfshuju", "ping", this.defense);
             }
         }
         else {

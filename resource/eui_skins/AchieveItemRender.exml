@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AchieveItemRenderSkin" width="880" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="169e15785bf" ></w:Config>
+	<e:Image width="958" height="275" x="-47" y="-42" anchorOffsetX="0" anchorOffsetY="0" source="gerenpaihang"/>
+	<e:Button id="AchieveBT" label="未完成" x="663" y="55" anchorOffsetX="0" width="160" anchorOffsetY="0" height="81"/>
+	<e:Label id="AchieveTitle" text="Label" x="77" y="28" anchorOffsetX="0" width="383" anchorOffsetY="0" height="118" textColor="0x000000" textAlign="left" verticalAlign="middle" size="40"/>
+	<e:Label id="Achievejincheng" text="20/20" x="475" y="36" height="118" anchorOffsetX="0" width="125" textColor="0x000000" verticalAlign="middle" textAlign="center"/>
+</e:Skin>
