@@ -219,22 +219,23 @@ var BeginPage = (function (_super) {
     };
     //设置成就列表
     BeginPage.prototype.SetAchieveList = function () {
-        var Aarray = new Array();
-        Aarray = this.AchieveG;
+        var Aarray = this.AchieveG;
         if (this.AchieveList.dataProvider) {
             //this.AchieveArrayColl.source = Aarray;
             //this.AchieveArrayColl.refresh();
             //this.AchieveArrayColl.source = null;
-            //console.log(this.AchieveArrayColl.source.length);
-            this.AchieveList.dataProvider = new eui.ArrayCollection(Aarray);
-            this.AchieveList.dataProviderRefreshed();
-            console.log(this.AchieveList.dataProvider);
+            this.AchieveArrayColl.removeAll();
+            for (var i = 0; i < Aarray.length; i++) {
+                this.AchieveArrayColl.addItem(Aarray[i]);
+            }
+            console.log(this.AchieveArrayColl);
         }
         else {
             console.log("创建成就列表");
             this.AchieveList = new eui.List();
-            this.AchieveArrayColl = new eui.ArrayCollection(this.AchieveG);
+            this.AchieveArrayColl = new eui.ArrayCollection();
             this.AchieveList.dataProvider = this.AchieveArrayColl;
+            this.AchieveArrayColl.replaceAll(Aarray);
             this.AchieveList.itemRenderer = AchieveItemRender;
             this.AchieveScroller.viewport = this.AchieveList;
             this.AchieveScroller.scrollPolicyH = eui.ScrollPolicy.OFF;

@@ -135,6 +135,10 @@ private init(){
 }
 //添加的所有事件
 private AddEvent(){
+	//抽奖按钮
+	this.choujiangBT.addEventListener(egret.TouchEvent.TOUCH_TAP,this.OpenAward,this);
+	//抽奖返回按钮
+	this.AwardBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.CloseAward,this);
 	//成就列表返回按钮
 	this.achieveBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.CloseAchieve,this);
 	//成就按钮
@@ -171,6 +175,14 @@ private AddEvent(){
 }
 //移除所有事件
 private RemoveEvent(){
+	if(this.choujiangBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.choujiangBT.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.OpenAward,this);
+	}
+	if(this.AwardBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.AwardBack.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.CloseAward,this);
+	}
 	if(this.achieveBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
 		this.achieveBack.removeEventListener(egret.TouchEvent.TOUCH_TAP
 		,this.CloseAchieve,this);
@@ -211,6 +223,14 @@ private RemoveEvent(){
 		SceneManager.instance().webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA,
 		this.onReceiveMessage,this);
 	}
+}
+//关闭抽奖面板
+private CloseAward(){
+	this.AwardGroup.visible = false;
+}
+//打开抽奖面板
+private OpenAward(){
+	this.AwardGroup.visible = true;
 }
 //关闭成就
 private CloseAchieve(){
@@ -316,21 +336,22 @@ private SetRankList(){
 }
 //设置成就列表
 private SetAchieveList(){
-	let Aarray:Array<any> = new Array<any>();
-	Aarray = this.AchieveG;
+	let Aarray = this.AchieveG;
 	if(this.AchieveList.dataProvider){
 		//this.AchieveArrayColl.source = Aarray;
 		//this.AchieveArrayColl.refresh();
 		//this.AchieveArrayColl.source = null;
-		//console.log(this.AchieveArrayColl.source.length);
-		this.AchieveList.dataProvider = new eui.ArrayCollection(Aarray);
-		this.AchieveList.dataProviderRefreshed();
-		console.log(this.AchieveList.dataProvider);
+		this.AchieveArrayColl.removeAll();
+		for(let i = 0;i < Aarray.length;i++){
+			this.AchieveArrayColl.addItem(Aarray[i]);
+		}
+		console.log(this.AchieveArrayColl);
 	}else{
 		console.log("创建成就列表");
 		this.AchieveList = new eui.List();
-		this.AchieveArrayColl = new eui.ArrayCollection(this.AchieveG);
+		this.AchieveArrayColl = new eui.ArrayCollection();
 		this.AchieveList.dataProvider = this.AchieveArrayColl;
+		this.AchieveArrayColl.replaceAll(Aarray);
 		this.AchieveList.itemRenderer = AchieveItemRender;
 		this.AchieveScroller.viewport = this.AchieveList;
 		this.AchieveScroller.scrollPolicyH = eui.ScrollPolicy.OFF;		
