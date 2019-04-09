@@ -52,7 +52,7 @@ const config: ResourceManagerConfig = {
                     new ResSplitPlugin({
                         matchers:[
                             {
-                                from:"resource/**",to:'../${projectName}_wxgame_remote'
+                                from:"resource/**",to:'../TaiTaiYun_wxgame_remote'
                             }
                         ]
                     }),

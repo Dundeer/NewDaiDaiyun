@@ -10,6 +10,7 @@ declare interface Platform {
 
     login(): Promise<any>
 
+    share(): Promise<any>;
 }
 
 class DebugPlatform implements Platform {
@@ -19,20 +20,21 @@ class DebugPlatform implements Platform {
     async login() {
 
     }
+    async share(){
+        
+    } 
 }
-
 
 if (!window.platform) {
     window.platform = new DebugPlatform();
 }
-
-
 
 declare let platform: Platform;
 
 declare interface Window {
 
     platform: Platform
+    
 }
 
 

@@ -76,6 +76,10 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	public AchieveScroller:eui.Scroller;
 	//成就的显示列表
 	public AchieveList:eui.List;
+	//奖池
+	public jackpot:Array<string> = [];
+	//抽奖的列表
+	public AwardList:eui.List;
 
 	//发送信息时使用的id
 	private id:string;
@@ -96,6 +100,12 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	//排行的数据存储
 	private AllRankAchieveArrayColl:eui.ArrayCollection;
 	
+	
+	//角色皮肤的组
+	private AllManSkin:Array<string> = ["skin1","skin2","skin3"];
+	//替身皮肤的组
+	private AllSubSkin:Array<string> = ["subskin1","subskin2","subskin3"];
+
 public constructor() {		
 	super();
 }
@@ -117,6 +127,8 @@ private init(){
 	this.AddEvent();
 	//获取用户id
 	this.id = SceneManager.instance().myid;
+	//关闭抽奖面板
+	this.CloseAward();
 	//关闭成就面板
 	this.CloseAchieve();
 	//初始化规则面板
@@ -231,6 +243,7 @@ private CloseAward(){
 //打开抽奖面板
 private OpenAward(){
 	this.AwardGroup.visible = true;
+	this.SetAwardList();
 }
 //关闭成就
 private CloseAchieve(){
@@ -358,6 +371,21 @@ private SetAchieveList(){
 		this.AchieveScroller.scrollPolicyV = eui.ScrollPolicy.ON;
 	}
 }
+//设置抽奖列表
+private SetAwardList(){
+	this.AwardList = new eui.List();
+	let AwardCollection = new eui.ArrayCollection();
+	for(let i = 0;i < 15;i++){
+		AwardCollection.addItem({"Label":"i"});
+	}
+	this.AwardList.dataProvider = AwardCollection;
+	this.AwardList.itemRenderer = AwardBt;
+	var layout = new eui.TileLayout();
+    layout.horizontalGap = 3;
+    layout.verticalGap = 3;
+    layout.requestedColumnCount = 3;
+	this.AwardList.layout = layout;
+}
 //发送信息到服务端
 private Sendsocket(type:string,start:string){
 	var cmd = '{"id":"'+this.id+'","type":"'+type+'","start":"'+start+'"}';
@@ -465,11 +493,5 @@ private onReceiveMessage(){
 		console.log(e);
 	}
 }	
-//修改item内容
-private gameCell(renderer: eui.IItemRenderer, itemIndex: number, data: any) : eui.IItemRenderer{
-   renderer.data = data;
-   renderer.itemIndex = itemIndex;
-   return renderer;
-}
 
 }

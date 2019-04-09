@@ -56,5 +56,10 @@
         "path": "..\\resource\\eui_skins\\AchieveItemRender.ts",
         "class": "AchieveItemRender",
         "parentPath": ""
+    },
+    "169fbde4a78": {
+        "path": "..\\resource\\eui_skins\\AwardBt.ts",
+        "class": "AwardBt",
+        "parentPath": ""
     }
 }

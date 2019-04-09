@@ -65,8 +65,9 @@ class Main extends eui.UILayer {
         await this.loadResource()
         this.createGameScene();
         await platform.login();
-        //const userInfo = await platform.getUserInfo();
-        //console.log(userInfo.nickName);   
+        await platform.share();
+        const userInfo = await platform.getUserInfo();
+        console.log(userInfo.nickName); 
     }
     
     private async loadResource() {

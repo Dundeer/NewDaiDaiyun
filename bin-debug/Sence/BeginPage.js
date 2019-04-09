@@ -12,6 +12,8 @@ var BeginPage = (function (_super) {
     __extends(BeginPage, _super);
     function BeginPage() {
         var _this = _super.call(this) || this;
+        //奖池
+        _this.jackpot = [];
         //是否开启匹配
         _this.ismatching = false;
         //当前数据的排位
@@ -24,6 +26,10 @@ var BeginPage = (function (_super) {
         _this.AchieveG = [];
         //发送过来的成就的数据的长度
         _this.AllAchieveLength = 0;
+        //角色皮肤的组
+        _this.AllManSkin = ["skin1", "skin2", "skin3"];
+        //替身皮肤的组
+        _this.AllSubSkin = ["subskin1", "subskin2", "subskin3"];
         return _this;
     }
     BeginPage.prototype.partAdded = function (partName, instance) {
@@ -39,6 +45,8 @@ var BeginPage = (function (_super) {
         this.AddEvent();
         //获取用户id
         this.id = SceneManager.instance().myid;
+        //关闭抽奖面板
+        this.CloseAward();
         //关闭成就面板
         this.CloseAchieve();
         //初始化规则面板
@@ -58,6 +66,13 @@ var BeginPage = (function (_super) {
     };
     //添加的所有事件
     BeginPage.prototype.AddEvent = function () {
+        this.ShareBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            platform.share();
+        }, this);
+        //抽奖按钮
+        this.choujiangBT.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAward, this);
+        //抽奖返回按钮
+        this.AwardBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseAward, this);
         //成就列表返回按钮
         this.achieveBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseAchieve, this);
         //成就按钮
@@ -85,6 +100,12 @@ var BeginPage = (function (_super) {
     };
     //移除所有事件
     BeginPage.prototype.RemoveEvent = function () {
+        if (this.choujiangBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.choujiangBT.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAward, this);
+        }
+        if (this.AwardBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.AwardBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseAward, this);
+        }
         if (this.achieveBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
             this.achieveBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseAchieve, this);
         }
@@ -115,6 +136,15 @@ var BeginPage = (function (_super) {
         if (SceneManager.instance().webSocket.hasEventListener(egret.ProgressEvent.SOCKET_DATA)) {
             SceneManager.instance().webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this);
         }
+    };
+    //关闭抽奖面板
+    BeginPage.prototype.CloseAward = function () {
+        this.AwardGroup.visible = false;
+    };
+    //打开抽奖面板
+    BeginPage.prototype.OpenAward = function () {
+        this.AwardGroup.visible = true;
+        this.SetAwardList();
     };
     //关闭成就
     BeginPage.prototype.CloseAchieve = function () {
@@ -242,6 +272,21 @@ var BeginPage = (function (_super) {
             this.AchieveScroller.scrollPolicyV = eui.ScrollPolicy.ON;
         }
     };
+    //设置抽奖列表
+    BeginPage.prototype.SetAwardList = function () {
+        this.AwardList = new eui.List();
+        var AwardCollection = new eui.ArrayCollection();
+        for (var i = 0; i < 15; i++) {
+            AwardCollection.addItem({ "Label": "i" });
+        }
+        this.AwardList.dataProvider = AwardCollection;
+        this.AwardList.itemRenderer = AwardBt;
+        var layout = new eui.TileLayout();
+        layout.horizontalGap = 3;
+        layout.verticalGap = 3;
+        layout.requestedColumnCount = 3;
+        this.AwardList.layout = layout;
+    };
     //发送信息到服务端
     BeginPage.prototype.Sendsocket = function (type, start) {
         var cmd = '{"id":"' + this.id + '","type":"' + type + '","start":"' + start + '"}';
@@ -349,12 +394,6 @@ var BeginPage = (function (_super) {
         catch (e) {
             console.log(e);
         }
-    };
-    //修改item内容
-    BeginPage.prototype.gameCell = function (renderer, itemIndex, data) {
-        renderer.data = data;
-        renderer.itemIndex = itemIndex;
-        return renderer;
     };
     return BeginPage;
 }(eui.Component));
