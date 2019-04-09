@@ -22,6 +22,8 @@ class SceneManager extends egret.Sprite {
 	private gameScene:GamePlay;
 	//是否时人机对战
 	public isAI:boolean = false;
+	//网络检测
+	private timer:egret.Timer;
 	//本机id
 	public myid:string = "wangshushuo";
 	public avatarUrl:any;
@@ -57,6 +59,7 @@ class SceneManager extends egret.Sprite {
 	//连接完成时的方法
 	private onSocketOpen(){
 		console.log("连接成功");
+		this.timer.stop();
 	}
 	//异常接收
 	private onSocketError(){
@@ -65,6 +68,16 @@ class SceneManager extends egret.Sprite {
 	//断开监听
 	private onSocketClose(){
 		console.log('服务器断开了');
+		this.timer = new egret.Timer(300);
+		console.log("尝试连接");
+		this.timer.addEventListener(egret.TimerEvent.TIMER,function(){
+			//连接服务器
+			console.log("尝试连接");
+			this.webSocket.close();
+			this.webSocket.connect(this.hostname,this.port);
+			
+		},this);
+		this.timer.start();
 	}
 	//切换场景
 	/**

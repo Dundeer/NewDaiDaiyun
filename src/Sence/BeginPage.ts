@@ -99,7 +99,7 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	private AchieveArrayColl:eui.ArrayCollection;
 	//排行的数据存储
 	private AllRankAchieveArrayColl:eui.ArrayCollection;
-	
+
 	
 	//角色皮肤的组
 	private AllManSkin:Array<string> = ["skin1","skin2","skin3"];
@@ -433,6 +433,9 @@ private onReceiveMessage(){
 			var timesNubmer:number = str.times;
 			//获取积分
 			var integral = str.integral;
+			//最高排行
+			var zuigao = str.zuigao;
+			this.highest.text = zuigao.toString();
 			//将数据展示到UI中
 			this.ShowSelfShuju(winnumber,timesNubmer,integral);
 			//将数据面板打开
@@ -441,15 +444,10 @@ private onReceiveMessage(){
 			case "个人排行":
 			//接收个人排行数据并处理
 			let selfdata = obj.data;
-			let Myrank:number = selfdata.jifen;
+			let Myrank:number = selfdata.paihang;
 			let MyId:string = selfdata.name;
 			let Myintegral:number = selfdata.integral;
-			let length:number = selfdata.Alllength;
-			if(length>20){
-				this.AllRankLength = 20;
-			}else{
-				this.AllRankLength = length;
-			}
+			
 			this.ShowSelfRank(Myrank,MyId,Myintegral);
 			this.Sendsocket("AllRank","0");
 			break;
@@ -458,6 +456,14 @@ private onReceiveMessage(){
 			this.CurrentRankNumber++;
 			//接收前二十的数据并处理，最后打开排行榜面板
 			let Alldata = obj.data;
+			if(this.AllRankLength == 0){
+				let length:number = Alldata.status;
+				if(length>20){
+					this.AllRankLength = 20;
+				}else{
+					this.AllRankLength = length;
+				}
+			}
 			let RankData = {
 				Rank:this.CurrentRankNumber,
 				ID:Alldata.name,
@@ -465,6 +471,7 @@ private onReceiveMessage(){
 			}
 			//将数据记录
 			this.let.push(RankData);
+			console.log(this.AllRankLength);
 			//打开排行榜面板
 			if(this.CurrentRankNumber == this.AllRankLength){
 				this.SetRankList();

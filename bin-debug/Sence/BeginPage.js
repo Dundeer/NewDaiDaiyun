@@ -66,9 +66,6 @@ var BeginPage = (function (_super) {
     };
     //添加的所有事件
     BeginPage.prototype.AddEvent = function () {
-        this.ShareBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            platform.share();
-        }, this);
         //抽奖按钮
         this.choujiangBT.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAward, this);
         //抽奖返回按钮
@@ -334,6 +331,9 @@ var BeginPage = (function (_super) {
                         var timesNubmer = str.times;
                         //获取积分
                         var integral = str.integral;
+                        //最高排行
+                        var zuigao = str.zuigao;
+                        this.highest.text = zuigao.tostring();
                         //将数据展示到UI中
                         this.ShowSelfShuju(winnumber, timesNubmer, integral);
                         //将数据面板打开
@@ -342,7 +342,8 @@ var BeginPage = (function (_super) {
                     case "个人排行":
                         //接收个人排行数据并处理
                         var selfdata = obj.data;
-                        var Myrank = selfdata.jifen;
+                        console.log(selfdata);
+                        var Myrank = selfdata.paihang;
                         var MyId = selfdata.name;
                         var Myintegral = selfdata.integral;
                         var length_1 = selfdata.Alllength;

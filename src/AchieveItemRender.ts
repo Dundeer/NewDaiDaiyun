@@ -28,17 +28,29 @@ class AchieveItemRender extends eui.Component implements  eui.IItemRenderer{
 		var fenzi:number;
 		switch(data.type){
 			case "pipei":
-			fenmu = this.pipei[data.pipei];
+			if(data.pipei > this.pipei.length){
+				fenmu = this.pipei[this.pipei.length - 1];
+			}else{
+				fenmu = this.pipei[data.pipei];
+			}
 			fenzi = data.times;
 			this.AchieveTitle.text = "进行"+fenmu+"场匹配对战";
 			break;
 			case "shengli":
-			fenmu = this.shengli[data.shengli];
+			if(data.shengli > this.shengli.length){
+				fenmu = this.shengli[this.shengli.length-1];
+			}else{
+				fenmu = this.shengli[data.shengli];
+			}
 			fenzi = data.win;
 			this.AchieveTitle.text = "取得"+fenmu+"场匹配胜利";
 			break;
 			case "fangyu":
+			if(data.fangyu > this.fangyu.length){
+				fenmu = this.fangyu[this.fangyu.length-1];
+			}else{
 			fenmu = this.fangyu[data.fangyu];
+			}
 			fenzi = data.defense;
 			this.AchieveTitle.text = "匹配对战中成功防御"+ fenmu +"次";
 			break;

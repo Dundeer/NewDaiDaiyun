@@ -92,7 +92,7 @@
 		</e:Button>
 		<e:Label text="正在匹配。。。" x="60.18" y="585" anchorOffsetX="0" width="956" anchorOffsetY="0" height="350" textColor="0x000000" verticalAlign="middle" textAlign="center" size="100"/>
 	</e:Group>
-	<e:Group id="RecordGroup" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="RecordGroup" left="0" right="0" top="0" bottom="0">
 		<e:Image anchorOffsetX="0" left="0" right="0" top="0" bottom="0" anchorOffsetY="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image anchorOffsetX="0" left="35" right="51" top="151" bottom="114" anchorOffsetY="0" source="BG1"/>

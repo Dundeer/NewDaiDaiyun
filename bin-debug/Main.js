@@ -108,8 +108,11 @@ var Main = (function (_super) {
                         return [4 /*yield*/, platform.login()];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, platform.getUserInfo()];
+                        return [4 /*yield*/, platform.share()];
                     case 3:
+                        _a.sent();
+                        return [4 /*yield*/, platform.getUserInfo()];
+                    case 4:
                         userInfo = _a.sent();
                         console.log(userInfo.nickName);
                         return [2 /*return*/];

@@ -53,6 +53,7 @@ var SceneManager = (function (_super) {
     //连接完成时的方法
     SceneManager.prototype.onSocketOpen = function () {
         console.log("连接成功");
+        this.timer.stop();
     };
     //异常接收
     SceneManager.prototype.onSocketError = function () {
@@ -60,6 +61,15 @@ var SceneManager = (function (_super) {
     //断开监听
     SceneManager.prototype.onSocketClose = function () {
         console.log('服务器断开了');
+        this.timer = new egret.Timer(300);
+        console.log("尝试连接");
+        this.timer.addEventListener(egret.TimerEvent.TIMER, function () {
+            //连接服务器
+            console.log("尝试连接");
+            this.webSocket.close();
+            this.webSocket.connect(this.hostname, this.port);
+        }, this);
+        this.timer.start();
     };
     //切换场景
     /**
