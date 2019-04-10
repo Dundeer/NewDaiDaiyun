@@ -25,6 +25,10 @@ var AwardBt = (function (_super) {
         configurable: true
     });
     AwardBt.prototype.updataView = function (data) {
+        console.log(this.itemIndex);
+        this.Bt.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            this.Bt.enabled = false;
+        }, this);
     };
     return AwardBt;
 }(eui.Component));

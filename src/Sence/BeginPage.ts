@@ -80,6 +80,11 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	public jackpot:Array<string> = [];
 	//抽奖的列表
 	public AwardList:eui.List;
+	//抽奖的滚动
+	public AwardScroller:eui.Scroller;
+	//抽奖中的金币显示
+	public goldTable:eui.Label;
+
 
 	//发送信息时使用的id
 	private id:string;
@@ -99,6 +104,8 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	private AchieveArrayColl:eui.ArrayCollection;
 	//排行的数据存储
 	private AllRankAchieveArrayColl:eui.ArrayCollection;
+	//抽奖的数据储存
+	private AwardCollection:eui.ArrayCollection;
 
 	
 	//角色皮肤的组
@@ -242,8 +249,7 @@ private CloseAward(){
 }
 //打开抽奖面板
 private OpenAward(){
-	this.AwardGroup.visible = true;
-	this.SetAwardList();
+	this.Sendsocket("Award","get");
 }
 //关闭成就
 private CloseAchieve(){
@@ -372,19 +378,32 @@ private SetAchieveList(){
 	}
 }
 //设置抽奖列表
-private SetAwardList(){
-	this.AwardList = new eui.List();
-	let AwardCollection = new eui.ArrayCollection();
-	for(let i = 0;i < 15;i++){
-		AwardCollection.addItem({"Label":"i"});
+private SetAwardList(awardData){
+	let gold:number = awardData.gold;
+	this.goldTable.text = gold.toString();
+	if(this.AwardList.dataProvider){
+		this.AwardCollection.removeAll();
+		for(let j = 0;j < 15;j++){
+			this.AwardCollection.addItem(awardData);
+		}
+	}else{
+		this.AwardList = new eui.List();
+		this.AwardCollection = new eui.ArrayCollection();
+	    for(let i = 0;i < 15;i++){
+			this.AwardCollection.addItem(awardData);
+		}
+		this.AwardList.dataProvider = this.AwardCollection;
+		this.AwardList.itemRenderer = AwardBt;
+		var layout = new eui.TileLayout();
+		layout.horizontalGap = 35;
+		layout.verticalGap = 5;
+		layout.requestedColumnCount = 3;
+		layout.requestedRowCount = 5;
+		this.AwardList.layout = layout;
+		this.AwardScroller.viewport = this.AwardList;
+		this.AwardScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+		this.AwardScroller.scrollPolicyV = eui.ScrollPolicy.OFF;
 	}
-	this.AwardList.dataProvider = AwardCollection;
-	this.AwardList.itemRenderer = AwardBt;
-	var layout = new eui.TileLayout();
-    layout.horizontalGap = 3;
-    layout.verticalGap = 3;
-    layout.requestedColumnCount = 3;
-	this.AwardList.layout = layout;
 }
 //发送信息到服务端
 private Sendsocket(type:string,start:string){
@@ -457,7 +476,7 @@ private onReceiveMessage(){
 			//接收前二十的数据并处理，最后打开排行榜面板
 			let Alldata = obj.data;
 			if(this.AllRankLength == 0){
-				let length:number = Alldata.status;
+				let length:number = obj.status;
 				if(length>20){
 					this.AllRankLength = 20;
 				}else{
@@ -493,6 +512,10 @@ private onReceiveMessage(){
 			case "成就修改":
 			this.CloseAchieve();
 			this.Sendsocket("Achieve","get");
+			break;
+			case "抽奖内容":
+			this.SetAwardList(obj.data);
+			this.AwardGroup.visible = true;
 			break;
 		}
 	}

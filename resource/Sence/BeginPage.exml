@@ -92,7 +92,7 @@
 		</e:Button>
 		<e:Label text="正在匹配。。。" x="60.18" y="585" anchorOffsetX="0" width="956" anchorOffsetY="0" height="350" textColor="0x000000" verticalAlign="middle" textAlign="center" size="100"/>
 	</e:Group>
-	<e:Group id="RecordGroup" left="0" right="0" top="0" bottom="0">
+	<e:Group id="RecordGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image anchorOffsetX="0" left="0" right="0" top="0" bottom="0" anchorOffsetY="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image anchorOffsetX="0" left="35" right="51" top="151" bottom="114" anchorOffsetY="0" source="BG1"/>
@@ -191,7 +191,7 @@
 			</e:skinName>
 		</e:Button>
 	</e:Group>
-	<e:Group id="AwardGroup" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="AwardGroup" left="0" right="0" top="0" bottom="0">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image width="600" height="180" x="240" y="-20" source="chou8_png" anchorOffsetY="0" anchorOffsetX="0"/>
@@ -216,7 +216,9 @@
 		<e:Label text="已有金币：" x="112.61" y="189.88" anchorOffsetX="0" width="198.24" anchorOffsetY="0" height="61.82" verticalAlign="middle" textAlign="left" size="35"/>
 		<e:Label id="goldTable" text="123" x="296.64" y="194.42" size="35" width="100" height="50" verticalAlign="middle" textAlign="center" textColor="0x000000"/>
 		<e:Label text="每次抽奖消耗5金币" x="611.33" y="193.48" anchorOffsetX="0" width="324.24" anchorOffsetY="0" height="61.39" textAlign="left" verticalAlign="middle" size="35"/>
-		<e:List id="AwardList" width="796" height="1168" x="136" y="288" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:Scroller id="AwardScroller" width="796" height="1168" x="139" y="291">
+			<e:List id="AwardList" x="142.06" y="291.03" anchorOffsetX="0" anchorOffsetY="0"/>
+		</e:Scroller>
 	</e:Group>
 	<e:Group id="SkinGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>

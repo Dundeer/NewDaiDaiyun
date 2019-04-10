@@ -279,10 +279,14 @@ var BeginPage = (function (_super) {
         this.AwardList.dataProvider = AwardCollection;
         this.AwardList.itemRenderer = AwardBt;
         var layout = new eui.TileLayout();
-        layout.horizontalGap = 3;
-        layout.verticalGap = 3;
+        layout.horizontalGap = 35;
+        layout.verticalGap = 5;
         layout.requestedColumnCount = 3;
+        layout.requestedRowCount = 5;
         this.AwardList.layout = layout;
+        this.AwardScroller.viewport = this.AwardList;
+        this.AwardScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+        this.AwardScroller.scrollPolicyV = eui.ScrollPolicy.OFF;
     };
     //发送信息到服务端
     BeginPage.prototype.Sendsocket = function (type, start) {
@@ -333,7 +337,7 @@ var BeginPage = (function (_super) {
                         var integral = str.integral;
                         //最高排行
                         var zuigao = str.zuigao;
-                        this.highest.text = zuigao.tostring();
+                        this.highest.text = zuigao.toString();
                         //将数据展示到UI中
                         this.ShowSelfShuju(winnumber, timesNubmer, integral);
                         //将数据面板打开
@@ -342,17 +346,9 @@ var BeginPage = (function (_super) {
                     case "个人排行":
                         //接收个人排行数据并处理
                         var selfdata = obj.data;
-                        console.log(selfdata);
                         var Myrank = selfdata.paihang;
                         var MyId = selfdata.name;
                         var Myintegral = selfdata.integral;
-                        var length_1 = selfdata.Alllength;
-                        if (length_1 > 20) {
-                            this.AllRankLength = 20;
-                        }
-                        else {
-                            this.AllRankLength = length_1;
-                        }
                         this.ShowSelfRank(Myrank, MyId, Myintegral);
                         this.Sendsocket("AllRank", "0");
                         break;
@@ -361,6 +357,15 @@ var BeginPage = (function (_super) {
                         this.CurrentRankNumber++;
                         //接收前二十的数据并处理，最后打开排行榜面板
                         var Alldata = obj.data;
+                        if (this.AllRankLength == 0) {
+                            var length_1 = obj.status;
+                            if (length_1 > 20) {
+                                this.AllRankLength = 20;
+                            }
+                            else {
+                                this.AllRankLength = length_1;
+                            }
+                        }
                         var RankData = {
                             Rank: this.CurrentRankNumber,
                             ID: Alldata.name,
@@ -368,6 +373,7 @@ var BeginPage = (function (_super) {
                         };
                         //将数据记录
                         this.let.push(RankData);
+                        console.log(this.AllRankLength);
                         //打开排行榜面板
                         if (this.CurrentRankNumber == this.AllRankLength) {
                             this.SetRankList();

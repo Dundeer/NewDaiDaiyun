@@ -24,7 +24,7 @@ const config: ResourceManagerConfig = {
                     new ResSplitPlugin({
                         matchers:[
                             {
-                                from:"resource/**",to:'../NewDaiDaiyun_wxgame_remote'
+                                from:"resource/**",to:'../TaiTaiYun_wxgame_remote'
                             }
                         ]
                     }),

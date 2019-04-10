@@ -14,7 +14,20 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 	public itemIndex:number;
 
 	private updataView(data:any){
+		this.Bt.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
+			this.Bt.enabled = false;
+			this.Sendsocket(this.itemIndex);
+		},this);
+		let OpenNumber = data["a"+this.itemIndex.toString()];
+		console.log(OpenNumber);
+		if(OpenNumber == 0){
+			this.Bt.enabled = false;
+		}
+	}
 
+	private Sendsocket(Button:number){
+		var cmd = '{"id":"'+SceneManager.instance().myid+'","type":"Award","start":"set","Button":"'+Button+'"}';
+		SceneManager.instance().webSocket.writeUTF(cmd);
 	}
 	
 }
