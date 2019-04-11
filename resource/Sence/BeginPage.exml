@@ -219,6 +219,20 @@
 		<e:Scroller id="AwardScroller" width="796" height="1168" x="139" y="291">
 			<e:List id="AwardList" x="142.06" y="291.03" anchorOffsetX="0" anchorOffsetY="0"/>
 		</e:Scroller>
+		<e:Group id="prize" anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="0" bottom="0" visible="false">
+			<e:Image anchorOffsetY="0" left="0" right="0" top="0" bottom="0"/>
+			<e:Image width="536" height="748" x="260" y="436" anchorOffsetX="0" anchorOffsetY="0" source="BG1"/>
+			<e:Label id="prizeTable" text="恭喜您获得了" x="356" y="536" anchorOffsetX="0" width="310" anchorOffsetY="0" height="98" textColor="0x000000" verticalAlign="middle" textAlign="left" size="40"/>
+			<e:Image id="prizeImage" width="220" height="220" x="412" y="708" anchorOffsetX="0" anchorOffsetY="0"/>
+			<e:Button id="prizeBack" label="关闭" x="428" y="1004" anchorOffsetX="0" width="180" anchorOffsetY="0" height="86"/>
+		</e:Group>
+		<e:Group id="goldhint" left="0" right="0" top="0" bottom="0" visible="false">
+			<e:Image left="0" right="0" top="0" bottom="0"/>
+			<e:Image width="536" height="748" x="260" y="436" source="BG1"/>
+			<e:Label text="金币不足，观看视频获取抽奖机会" x="328" y="584" anchorOffsetX="0" width="386" anchorOffsetY="0" height="146" textColor="0x000000" size="47"/>
+			<e:Button id="goldhintBack" label="取消" x="348" y="920" anchorOffsetX="0" width="148" anchorOffsetY="0" height="78"/>
+			<e:Button id="goldhintConfirm" label="确定" x="556" y="920" anchorOffsetX="0" width="164" anchorOffsetY="0" height="82"/>
+		</e:Group>
 	</e:Group>
 	<e:Group id="SkinGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>

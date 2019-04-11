@@ -76,15 +76,26 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	public AchieveScroller:eui.Scroller;
 	//成就的显示列表
 	public AchieveList:eui.List;
-	//奖池
-	public jackpot:Array<string> = [];
 	//抽奖的列表
 	public AwardList:eui.List;
 	//抽奖的滚动
 	public AwardScroller:eui.Scroller;
 	//抽奖中的金币显示
 	public goldTable:eui.Label;
-
+	//显示奖励
+	public prize:eui.Group;
+	//显示奖励的文字
+	public prizeTable:eui.Label;
+	//显示奖励的图片
+	public prizeImage:eui.Image;
+	//关闭显示奖励按钮
+	public prizeBack:eui.Button;
+	//金币不足提示
+	public goldhint:eui.Group;
+	//金币不足返回按钮
+	public goldhintBack:eui.Button;
+	//开启奖励视频按钮
+	public goldhintConfirm:eui.Button;
 
 	//发送信息时使用的id
 	private id:string;
@@ -106,12 +117,16 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	private AllRankAchieveArrayColl:eui.ArrayCollection;
 	//抽奖的数据储存
 	private AwardCollection:eui.ArrayCollection;
+	//当前金币个数
+	public CurrentGold:number = 0;
 
-	
-	//角色皮肤的组
-	private AllManSkin:Array<string> = ["skin1","skin2","skin3"];
-	//替身皮肤的组
-	private AllSubSkin:Array<string> = ["subskin1","subskin2","subskin3"];
+	private static _instance:BeginPage;
+	public static Instance():BeginPage{
+		if(this._instance == null){
+			BeginPage._instance = new BeginPage();
+		}
+		return BeginPage._instance;
+	}
 
 public constructor() {		
 	super();
@@ -134,6 +149,8 @@ private init(){
 	this.AddEvent();
 	//获取用户id
 	this.id = SceneManager.instance().myid;
+	//关闭金币提示面板
+	this.CloseGoldHint();
 	//关闭抽奖面板
 	this.CloseAward();
 	//关闭成就面板
@@ -154,6 +171,8 @@ private init(){
 }
 //添加的所有事件
 private AddEvent(){
+	//关闭金币提示按钮
+	this.goldhintBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.CloseGoldHint,this);
 	//抽奖按钮
 	this.choujiangBT.addEventListener(egret.TouchEvent.TOUCH_TAP,this.OpenAward,this);
 	//抽奖返回按钮
@@ -191,9 +210,25 @@ private AddEvent(){
 	//服务器数据监听
 	SceneManager.instance().webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA,
 	this.onReceiveMessage,this);
+	//关闭奖励提示按钮
+	this.prizeBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.ClosePrize,this);
+	//换一盒
+	this.ChangedBox.addEventListener(egret.TouchEvent.TOUCH_TAP,this.ChangeNewBox,this);
 }
 //移除所有事件
 private RemoveEvent(){
+	if(this.ChangedBox.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.ChangedBox.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.ChangeNewBox,this);
+	}
+	if(this.prizeBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.prizeBack.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.ClosePrize,this);
+	}
+	if(this.goldhintBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.goldhintBack.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.CloseGoldHint,this);
+	}
 	if(this.choujiangBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
 		this.choujiangBT.removeEventListener(egret.TouchEvent.TOUCH_TAP
 		,this.OpenAward,this);
@@ -242,6 +277,23 @@ private RemoveEvent(){
 		SceneManager.instance().webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA,
 		this.onReceiveMessage,this);
 	}
+}
+//开启奖励提示
+public OpenPrize(str:string){
+	this.prizeTable.text = str;
+	this.prize.visible = true;
+}
+//关闭奖励提示
+private ClosePrize(){
+	this.prize.visible = false;
+}
+//打开金币提示
+public OpenGoldHint(){
+	this.goldhint.visible = true;
+}
+//关闭金币提示
+private CloseGoldHint(){
+	this.goldhint.visible = false;
 }
 //关闭抽奖面板
 private CloseAward(){
@@ -379,8 +431,9 @@ private SetAchieveList(){
 }
 //设置抽奖列表
 private SetAwardList(awardData){
-	let gold:number = awardData.gold;
-	this.goldTable.text = gold.toString();
+	this.CurrentGold = awardData.gold;
+	console.log(this.CurrentGold);
+	this.goldTable.text = this.CurrentGold.toString();
 	if(this.AwardList.dataProvider){
 		this.AwardCollection.removeAll();
 		for(let j = 0;j < 15;j++){
@@ -404,6 +457,11 @@ private SetAwardList(awardData){
 		this.AwardScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
 		this.AwardScroller.scrollPolicyV = eui.ScrollPolicy.OFF;
 	}
+}
+
+//换一盒
+private ChangeNewBox(){
+	this.Sendsocket("Award","restart");
 }
 //发送信息到服务端
 private Sendsocket(type:string,start:string){
