@@ -271,11 +271,8 @@
 				</e:Skin>
 			</e:skinName>
 		</e:Button>
-		<e:Scroller id="skinScoller" width="868" height="1108" y="308" anchorOffsetX="0" anchorOffsetY="0" x="100" visible="false">
+		<e:Scroller id="skinScoller" width="868" height="1108" y="308" anchorOffsetX="0" anchorOffsetY="0" x="100">
 			<e:List id="skinlist"/>
-		</e:Scroller>
-		<e:Scroller id="subskinScroller" width="868" height="1108" x="100" y="308" visible="false">
-			<e:List id="subskinlist"/>
 		</e:Scroller>
 	</e:Group>
 </e:Skin>

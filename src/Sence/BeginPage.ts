@@ -106,10 +106,6 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	public skinScoller:eui.Scroller;
 	//人物皮肤的列表
 	public skinlist:eui.List;
-	//替身皮肤显示的组
-	public subskinScroller:eui.Scroller;
-	//替身皮肤的列表
-	public subskinlist:eui.List;
 
 	//发送信息时使用的id
 	private id:string;
@@ -123,14 +119,20 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	private let = [];
 	//放置成就数据的数组
 	private AchieveG = [];
+	//皮肤的数组
+	private SkinG = [];
 	//发送过来的成就的数据的长度
 	private AllAchieveLength = 0;
+	//皮肤列表的长度
+	private SkinLength:number = 0;
 	//成就的数据存储
 	private AchieveArrayColl:eui.ArrayCollection;
 	//排行的数据存储
 	private AllRankAchieveArrayColl:eui.ArrayCollection;
 	//抽奖的数据储存
 	private AwardCollection:eui.ArrayCollection;
+	//皮肤数据的储存
+	private SkinCollection:eui.ArrayCollection;
 	//当前金币个数
 	public CurrentGold:number = 0;
 	//当前显示皮肤
@@ -307,9 +309,9 @@ private OpenSkin(){
 //关闭皮肤界面
 private CloseSkin(){
 	this.SkinGroup.visible = false;
-	this.skinScoller.visible = false;
-	this.subskinScroller.visible = false;
 	this.CurrentSkin = "sub";
+	this.SkinG.splice(0,this.SkinG.length);
+	this.SkinLength = 0;
 }
 //开启奖励提示
 public OpenPrize(str:string){
@@ -494,6 +496,31 @@ private SetAwardList(awardData){
 private ChangeNewBox(){
 	this.Sendsocket("Award","restart","");
 }
+//设置皮肤列表
+private SetSkinList(){
+	if(this.skinlist.dataProvider)//如果皮肤数据存在
+	{
+		this.SkinCollection.removeAll();
+		for(let i = 0;i < this.SkinG.length;i++){
+			this.SkinCollection.addItem(this.SkinG[i]);
+		}
+	}
+	else//不存在
+	{
+		this.skinlist = new eui.List();
+		this.SkinCollection = new eui.ArrayCollection();
+		for(let i = 0;i < this.SkinG.length;i++){
+			this.SkinCollection.addItem(this.SkinG[i]);
+		}
+		this.skinlist.dataProvider = this.SkinCollection;
+		var layout = new eui.TileLayout();
+		layout.horizontalGap = 40;
+		layout.verticalGap = 10;
+		layout.requestedRowCount = 2;
+		this.skinScoller.viewport = this.skinlist;
+		this.skinScoller.scrollPolicyV = eui.ScrollPolicy.OFF;
+	}
+}
 //发送信息到服务端
 private Sendsocket(type:string,start:string,skin:string){
 	var cmd = '{"id":"'+this.id+'","type":"'+type+'","start":"'+start+'","skin":"'+skin+'"}';
@@ -605,6 +632,16 @@ private onReceiveMessage(){
 			case "抽奖内容":
 			this.SetAwardList(obj.data);
 			this.AwardGroup.visible = true;
+			break;
+			case "皮肤内容":
+			if(this.SkinLength == 0){
+				this.SkinLength = obj.status;
+			}
+			this.SkinG.push(obj.data);
+			if(this.SkinG.length == this.SkinLength){
+				this.SetSkinList();
+				this.SkinGroup.visible = true;
+			}
 			break;
 		}
 	}
