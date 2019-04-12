@@ -17,9 +17,9 @@ class SceneManager extends egret.Sprite {
 	//储存信息
 	public json:any;
 	//开始场景
-	private beginScene:BeginPage;
+	public beginScene:BeginPage;
 	//游戏场景
-	private gameScene:GamePlay;
+	public gameScene:GamePlay;
 	//是否时人机对战
 	public isAI:boolean = false;
 	//本机id

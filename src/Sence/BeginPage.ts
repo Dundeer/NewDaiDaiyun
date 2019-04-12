@@ -96,6 +96,20 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	public goldhintBack:eui.Button;
 	//开启奖励视频按钮
 	public goldhintConfirm:eui.Button;
+	//人物皮肤按钮
+	public ManSkin:eui.Button;
+	//替身皮肤按钮
+	public SubSkin:eui.Button;
+	//观看广告按钮
+	public adevrt:eui.Button;
+	//人物皮肤显示的组
+	public skinScoller:eui.Scroller;
+	//人物皮肤的列表
+	public skinlist:eui.List;
+	//替身皮肤显示的组
+	public subskinScroller:eui.Scroller;
+	//替身皮肤的列表
+	public subskinlist:eui.List;
 
 	//发送信息时使用的id
 	private id:string;
@@ -119,14 +133,8 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	private AwardCollection:eui.ArrayCollection;
 	//当前金币个数
 	public CurrentGold:number = 0;
-
-	private static _instance:BeginPage;
-	public static Instance():BeginPage{
-		if(this._instance == null){
-			BeginPage._instance = new BeginPage();
-		}
-		return BeginPage._instance;
-	}
+	//当前显示皮肤
+	private CurrentSkin = "skin";
 
 public constructor() {		
 	super();
@@ -149,6 +157,8 @@ private init(){
 	this.AddEvent();
 	//获取用户id
 	this.id = SceneManager.instance().myid;
+	//关闭皮肤面板
+	this.CloseSkin();
 	//关闭金币提示面板
 	this.CloseGoldHint();
 	//关闭抽奖面板
@@ -214,9 +224,21 @@ private AddEvent(){
 	this.prizeBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.ClosePrize,this);
 	//换一盒
 	this.ChangedBox.addEventListener(egret.TouchEvent.TOUCH_TAP,this.ChangeNewBox,this);
+	//关闭皮肤面板
+	this.SkinBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.CloseSkin,this);
+	//开启皮肤面板
+	this.pifuBT.addEventListener(egret.TouchEvent.TOUCH_TAP,this.OpenSkin,this);
 }
 //移除所有事件
 private RemoveEvent(){
+	if(this.pifuBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.pifuBT.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.OpenSkin,this);
+	}
+	if(this.SkinBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.SkinBack.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.CloseSkin,this);
+	}
 	if(this.ChangedBox.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
 		this.ChangedBox.removeEventListener(egret.TouchEvent.TOUCH_TAP
 		,this.ChangeNewBox,this);
@@ -278,6 +300,17 @@ private RemoveEvent(){
 		this.onReceiveMessage,this);
 	}
 }
+//开启皮肤面板
+private OpenSkin(){
+	this.Sendsocket("Skin","get","sub");
+}
+//关闭皮肤界面
+private CloseSkin(){
+	this.SkinGroup.visible = false;
+	this.skinScoller.visible = false;
+	this.subskinScroller.visible = false;
+	this.CurrentSkin = "sub";
+}
 //开启奖励提示
 public OpenPrize(str:string){
 	this.prizeTable.text = str;
@@ -301,7 +334,7 @@ private CloseAward(){
 }
 //打开抽奖面板
 private OpenAward(){
-	this.Sendsocket("Award","get");
+	this.Sendsocket("Award","get","");
 }
 //关闭成就
 private CloseAchieve(){
@@ -311,7 +344,7 @@ private CloseAchieve(){
 }
 //开启成就
 private OpenAchieve(){
-	this.Sendsocket("Achieve","get");	
+	this.Sendsocket("Achieve","get","");	
 }
 //关闭排行榜
 private CloseRank(){
@@ -322,7 +355,7 @@ private CloseRank(){
 }
 //展示排行榜
 private OpenRank(){
-	this.Sendsocket("SelfRank","0");
+	this.Sendsocket("SelfRank","0","");
 }
 //关闭规则面板
 private CloseRule(){
@@ -338,7 +371,7 @@ private CloseRecord(){
 }
 //展示战绩
 private Record(){
-	this.Sendsocket("Selfshuju","cha");
+	this.Sendsocket("Selfshuju","cha","");
 }
 //开始ai对战
 private ai(){
@@ -351,7 +384,7 @@ private ai(){
 private BackBegin(){
 	this.Matching.visible = false;
 	this.ismatching = false;
-	this.Sendsocket("Quit","0");	
+	this.Sendsocket("Quit","0","");	
 }
 //开始匹配
 public matching(){
@@ -359,7 +392,7 @@ public matching(){
 	SceneManager.instance().isAI = false;
 	this.Matching.visible = true;
 	this.ismatching = true;	
-	this.Sendsocket("Login","0");	
+	this.Sendsocket("Login","0","");	
 }
 //使自己的战绩显示到UI中
 private ShowSelfShuju(winnumber:number,timesNubmer:number,integral:number){
@@ -432,7 +465,6 @@ private SetAchieveList(){
 //设置抽奖列表
 private SetAwardList(awardData){
 	this.CurrentGold = awardData.gold;
-	console.log(this.CurrentGold);
 	this.goldTable.text = this.CurrentGold.toString();
 	if(this.AwardList.dataProvider){
 		this.AwardCollection.removeAll();
@@ -458,14 +490,13 @@ private SetAwardList(awardData){
 		this.AwardScroller.scrollPolicyV = eui.ScrollPolicy.OFF;
 	}
 }
-
 //换一盒
 private ChangeNewBox(){
-	this.Sendsocket("Award","restart");
+	this.Sendsocket("Award","restart","");
 }
 //发送信息到服务端
-private Sendsocket(type:string,start:string){
-	var cmd = '{"id":"'+this.id+'","type":"'+type+'","start":"'+start+'"}';
+private Sendsocket(type:string,start:string,skin:string){
+	var cmd = '{"id":"'+this.id+'","type":"'+type+'","start":"'+start+'","skin":"'+skin+'"}';
 	SceneManager.instance().webSocket.writeUTF(cmd);
 }
 //监听服务器回复
@@ -481,13 +512,13 @@ private onReceiveMessage(){
 			case "通讯中":
 			//返回的信息为“通讯中”且开始匹配则向服务端发送加入房间请求	
 			if(this.ismatching){
-				this.Sendsocket("Joinin","0");
+				this.Sendsocket("Joinin","0","");
 			}
 			break;
 			case "进入房间":
 			//如果已经进入房间则向服务端发送开始游戏请求
 			this.Matching.visible = true;	
-			this.Sendsocket("Gaming","1");
+			this.Sendsocket("Gaming","1","");
 			break;
 			case "对方已准备":
 			//如果对方已经准备开始战斗则跳转到战斗界面
@@ -497,7 +528,7 @@ private onReceiveMessage(){
 			break;
 			case "退出房间":
 			//如果已经退出房间则向服务端发送验证通信请求
-			this.Sendsocket("Login","0");
+			this.Sendsocket("Login","0","");
 			break;
 			case "个人数据":
 			//接收到个人数据并把数据显示到UI上
@@ -526,7 +557,7 @@ private onReceiveMessage(){
 			let Myintegral:number = selfdata.integral;
 			
 			this.ShowSelfRank(Myrank,MyId,Myintegral);
-			this.Sendsocket("AllRank","0");
+			this.Sendsocket("AllRank","0","");
 			break;
 			case "总排行":
 			//记录当前人的排行
@@ -569,7 +600,7 @@ private onReceiveMessage(){
 			break;
 			case "成就修改":
 			this.CloseAchieve();
-			this.Sendsocket("Achieve","get");
+			this.Sendsocket("Achieve","get","");
 			break;
 			case "抽奖内容":
 			this.SetAwardList(obj.data);

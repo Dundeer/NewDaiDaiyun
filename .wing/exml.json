@@ -61,5 +61,10 @@
         "path": "..\\resource\\eui_skins\\AwardBt.ts",
         "class": "AwardBt",
         "parentPath": ""
+    },
+    "16a10deb285": {
+        "path": "..\\resource\\eui_skins\\SkinListItem.ts",
+        "class": "SkinListItem",
+        "parentPath": ""
     }
 }

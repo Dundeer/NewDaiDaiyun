@@ -19,7 +19,6 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 		this.SetJackpot(data);
 		this.Bt.addEventListener(egret.TouchEvent.TOUCH_TAP,this.ButtonF,this);
 		let OpenNumber = data["a"+this.itemIndex.toString()];
-		console.log(OpenNumber);
 		if(OpenNumber == 0){
 			this.Bt.enabled = false;
 		}else{
@@ -29,13 +28,11 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 
 	private ButtonF(){
 		var gold:number = this._data.gold;
-		console.log(gold);
 		if(gold >= 5){
 			this.Bt.enabled = false;
 			var number:number = Math.round(Math.random() * this.jackpot.length);
 			var prizeStr:string;
 			var jackpotStr:string = this.jackpot[number];
-			console.log(jackpotStr);
 			switch(jackpotStr){
 				case "gold1":
 				prizeStr = "一金币！";
@@ -47,28 +44,28 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 				prizeStr = "十金币！";
 				break;
 				case "skin1":
-				prizeStr = this._data['skin1'];
+				prizeStr = this._data.skin1;
 				break;
 				case "skin2":
-				prizeStr = this._data['skin1'];
+				prizeStr = this._data.skin2;
 				break;
 				case "skin3":
-				prizeStr = this._data['skin1'];
+				prizeStr = this._data.skin3;
 				break;
 				case "subskin1":
 				prizeStr = this._data['subskin1'];
 				break;
 				case "subskin2":
-				prizeStr = this._data['subskin1'];
+				prizeStr = this._data['subskin2'];
 				break;
 				case "subskin3":
-				prizeStr = this._data['subskin1'];
+				prizeStr = this._data['subskin3'];
 				break;
 			}
-			//BeginPage.Instance().OpenPrize(prizeStr);
+			SceneManager.instance().beginScene.OpenPrize(prizeStr);
 			this.Sendsocket(this.itemIndex,jackpotStr);
 		}else{
-			//BeginPage.Instance().OpenGoldHint();
+			SceneManager.instance().beginScene.OpenGoldHint();
 		}
 		
 	}
