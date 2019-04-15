@@ -30,9 +30,10 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 		var gold:number = this._data.gold;
 		if(gold >= 5){
 			this.Bt.enabled = false;
-			var number:number = Math.round(Math.random() * this.jackpot.length);
+			var number:number = Math.floor(Math.random() * this.jackpot.length);
 			var prizeStr:string;
 			var jackpotStr:string = this.jackpot[number];
+			var nowtime = (new Date()).valueOf();
 			switch(jackpotStr){
 				case "gold1":
 				prizeStr = "一金币！";

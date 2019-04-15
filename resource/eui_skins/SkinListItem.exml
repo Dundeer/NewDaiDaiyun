@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SkinListItemSkin" width="330" height="440" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+<e:Skin class="SkinListItemSkin" width="360" height="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="16a10deb285" ></w:Config>
-	<e:Image left="0" right="0" top="0" bottom="0" source="BG1"/>
-	<e:Image width="217" height="67" x="57" y="336" anchorOffsetX="0" anchorOffsetY="0" source="gerenpaihang"/>
-	<e:Image id="SkinImage" width="179" height="197" x="74" y="78" anchorOffsetX="0" anchorOffsetY="0"/>
-	<e:Label id="skinLabel" text="默认" x="68" y="347" anchorOffsetX="0" width="193" anchorOffsetY="0" height="44" textColor="0x000000" verticalAlign="middle" textAlign="center"/>
-	<e:Label id="skintimelabel" text="1天1时1分" x="177" y="33" anchorOffsetX="0" width="123" anchorOffsetY="0" height="34" textColor="0x000000" size="25"/>
+	<e:Button id="skinBt" label="Button" left="0" right="0" top="0" bottom="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="BG1"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Image width="217" height="73.06" x="73.67" y="336" anchorOffsetX="0" anchorOffsetY="0" source="gerenpaihang"/>
+	<e:Image id="SkinImage" width="179" height="197" x="92.19" y="87.09" anchorOffsetX="0" anchorOffsetY="0" source="bg_jpg"/>
+	<e:Label id="skinLabel" text="默认" x="84.66" y="347" anchorOffsetX="0" width="199.06" anchorOffsetY="0" height="51.58" textColor="0x000000" verticalAlign="middle" textAlign="center"/>
+	<e:Label id="skintimelabel" text="1天1时1分" x="125.49" y="33" anchorOffsetX="0" width="200" anchorOffsetY="0" height="34" textColor="0x000000" size="25" textAlign="right" verticalAlign="middle"/>
+	<e:Rect id="shade" left="0" right="0" top="0" bottom="0" fillAlpha="0.3"/>
 </e:Skin>

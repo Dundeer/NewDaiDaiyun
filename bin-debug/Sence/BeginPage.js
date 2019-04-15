@@ -12,8 +12,6 @@ var BeginPage = (function (_super) {
     __extends(BeginPage, _super);
     function BeginPage() {
         var _this = _super.call(this) || this;
-        //奖池
-        _this.jackpot = [];
         //是否开启匹配
         _this.ismatching = false;
         //当前数据的排位
@@ -24,12 +22,16 @@ var BeginPage = (function (_super) {
         _this.let = [];
         //放置成就数据的数组
         _this.AchieveG = [];
+        //皮肤的数组
+        _this.SkinG = [];
         //发送过来的成就的数据的长度
         _this.AllAchieveLength = 0;
-        //角色皮肤的组
-        _this.AllManSkin = ["skin1", "skin2", "skin3"];
-        //替身皮肤的组
-        _this.AllSubSkin = ["subskin1", "subskin2", "subskin3"];
+        //皮肤列表的长度
+        _this.SkinLength = 0;
+        //当前金币个数
+        _this.CurrentGold = 0;
+        //当前显示皮肤
+        _this.CurrentSkin = "skin";
         return _this;
     }
     BeginPage.prototype.partAdded = function (partName, instance) {
@@ -45,6 +47,10 @@ var BeginPage = (function (_super) {
         this.AddEvent();
         //获取用户id
         this.id = SceneManager.instance().myid;
+        //关闭皮肤面板
+        this.CloseSkin();
+        //关闭金币提示面板
+        this.CloseGoldHint();
         //关闭抽奖面板
         this.CloseAward();
         //关闭成就面板
@@ -66,6 +72,8 @@ var BeginPage = (function (_super) {
     };
     //添加的所有事件
     BeginPage.prototype.AddEvent = function () {
+        //关闭金币提示按钮
+        this.goldhintBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseGoldHint, this);
         //抽奖按钮
         this.choujiangBT.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAward, this);
         //抽奖返回按钮
@@ -94,9 +102,42 @@ var BeginPage = (function (_super) {
         this.MatchingBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.BackBegin, this);
         //服务器数据监听
         SceneManager.instance().webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this);
+        //关闭奖励提示按钮
+        this.prizeBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ClosePrize, this);
+        //换一盒
+        this.ChangedBox.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ChangeNewBox, this);
+        //关闭皮肤面板
+        this.SkinBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseSkin, this);
+        //开启皮肤面板
+        this.pifuBT.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenSkin, this);
+        //替身皮肤按钮
+        this.SubSkin.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenSubSkin, this);
+        //皮肤按钮
+        this.ManSkin.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenSkin, this);
     };
     //移除所有事件
     BeginPage.prototype.RemoveEvent = function () {
+        if (this.SubSkin.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.SubSkin.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenSubSkin, this);
+        }
+        if (this.ManSkin.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.ManSkin.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenSkin, this);
+        }
+        if (this.pifuBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.pifuBT.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenSkin, this);
+        }
+        if (this.SkinBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.SkinBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseSkin, this);
+        }
+        if (this.ChangedBox.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.ChangedBox.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ChangeNewBox, this);
+        }
+        if (this.prizeBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.prizeBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ClosePrize, this);
+        }
+        if (this.goldhintBack.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.goldhintBack.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.CloseGoldHint, this);
+        }
         if (this.choujiangBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
             this.choujiangBT.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OpenAward, this);
         }
@@ -134,14 +175,45 @@ var BeginPage = (function (_super) {
             SceneManager.instance().webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveMessage, this);
         }
     };
+    //开启替身皮肤面板
+    BeginPage.prototype.OpenSubSkin = function () {
+        this.Sendsocket("Skin", "get", "subskin");
+    };
+    //开启皮肤面板
+    BeginPage.prototype.OpenSkin = function () {
+        this.Sendsocket("Skin", "get", "skin");
+    };
+    //关闭皮肤界面
+    BeginPage.prototype.CloseSkin = function () {
+        this.SkinGroup.visible = false;
+        this.CurrentSkin = "sub";
+        this.SkinG.splice(0, this.SkinG.length);
+        this.SkinLength = 0;
+    };
+    //开启奖励提示
+    BeginPage.prototype.OpenPrize = function (str) {
+        this.prizeTable.text = str;
+        this.prize.visible = true;
+    };
+    //关闭奖励提示
+    BeginPage.prototype.ClosePrize = function () {
+        this.prize.visible = false;
+    };
+    //打开金币提示
+    BeginPage.prototype.OpenGoldHint = function () {
+        this.goldhint.visible = true;
+    };
+    //关闭金币提示
+    BeginPage.prototype.CloseGoldHint = function () {
+        this.goldhint.visible = false;
+    };
     //关闭抽奖面板
     BeginPage.prototype.CloseAward = function () {
         this.AwardGroup.visible = false;
     };
     //打开抽奖面板
     BeginPage.prototype.OpenAward = function () {
-        this.AwardGroup.visible = true;
-        this.SetAwardList();
+        this.Sendsocket("Award", "get", "");
     };
     //关闭成就
     BeginPage.prototype.CloseAchieve = function () {
@@ -151,7 +223,7 @@ var BeginPage = (function (_super) {
     };
     //开启成就
     BeginPage.prototype.OpenAchieve = function () {
-        this.Sendsocket("Achieve", "get");
+        this.Sendsocket("Achieve", "get", "");
     };
     //关闭排行榜
     BeginPage.prototype.CloseRank = function () {
@@ -162,7 +234,7 @@ var BeginPage = (function (_super) {
     };
     //展示排行榜
     BeginPage.prototype.OpenRank = function () {
-        this.Sendsocket("SelfRank", "0");
+        this.Sendsocket("SelfRank", "0", "");
     };
     //关闭规则面板
     BeginPage.prototype.CloseRule = function () {
@@ -178,7 +250,7 @@ var BeginPage = (function (_super) {
     };
     //展示战绩
     BeginPage.prototype.Record = function () {
-        this.Sendsocket("Selfshuju", "cha");
+        this.Sendsocket("Selfshuju", "cha", "");
     };
     //开始ai对战
     BeginPage.prototype.ai = function () {
@@ -191,7 +263,7 @@ var BeginPage = (function (_super) {
     BeginPage.prototype.BackBegin = function () {
         this.Matching.visible = false;
         this.ismatching = false;
-        this.Sendsocket("Quit", "0");
+        this.Sendsocket("Quit", "0", "");
     };
     //开始匹配
     BeginPage.prototype.matching = function () {
@@ -199,7 +271,7 @@ var BeginPage = (function (_super) {
         SceneManager.instance().isAI = false;
         this.Matching.visible = true;
         this.ismatching = true;
-        this.Sendsocket("Login", "0");
+        this.Sendsocket("Login", "0", "");
     };
     //使自己的战绩显示到UI中
     BeginPage.prototype.ShowSelfShuju = function (winnumber, timesNubmer, integral) {
@@ -270,27 +342,70 @@ var BeginPage = (function (_super) {
         }
     };
     //设置抽奖列表
-    BeginPage.prototype.SetAwardList = function () {
-        this.AwardList = new eui.List();
-        var AwardCollection = new eui.ArrayCollection();
-        for (var i = 0; i < 15; i++) {
-            AwardCollection.addItem({ "Label": "i" });
+    BeginPage.prototype.SetAwardList = function (awardData) {
+        this.CurrentGold = awardData.gold;
+        this.goldTable.text = this.CurrentGold.toString();
+        if (this.AwardList.dataProvider) {
+            this.AwardCollection.removeAll();
+            for (var j = 0; j < 15; j++) {
+                this.AwardCollection.addItem(awardData);
+            }
         }
-        this.AwardList.dataProvider = AwardCollection;
-        this.AwardList.itemRenderer = AwardBt;
-        var layout = new eui.TileLayout();
-        layout.horizontalGap = 35;
-        layout.verticalGap = 5;
-        layout.requestedColumnCount = 3;
-        layout.requestedRowCount = 5;
-        this.AwardList.layout = layout;
-        this.AwardScroller.viewport = this.AwardList;
-        this.AwardScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
-        this.AwardScroller.scrollPolicyV = eui.ScrollPolicy.OFF;
+        else {
+            this.AwardList = new eui.List();
+            this.AwardCollection = new eui.ArrayCollection();
+            for (var i = 0; i < 15; i++) {
+                this.AwardCollection.addItem(awardData);
+            }
+            this.AwardList.dataProvider = this.AwardCollection;
+            this.AwardList.itemRenderer = AwardBt;
+            var layout = new eui.TileLayout();
+            layout.horizontalGap = 35;
+            layout.verticalGap = 5;
+            layout.requestedColumnCount = 3;
+            layout.requestedRowCount = 5;
+            this.AwardList.layout = layout;
+            this.AwardScroller.viewport = this.AwardList;
+            this.AwardScroller.scrollPolicyH = eui.ScrollPolicy.OFF;
+            this.AwardScroller.scrollPolicyV = eui.ScrollPolicy.OFF;
+        }
+    };
+    //换一盒
+    BeginPage.prototype.ChangeNewBox = function () {
+        this.Sendsocket("Award", "restart", "");
+    };
+    //设置皮肤列表
+    BeginPage.prototype.SetSkinList = function () {
+        if (this.skinlist.dataProvider) {
+            this.SkinCollection.removeAll();
+            for (var i = 0; i < this.SkinG.length; i++) {
+                this.SkinCollection.addItem(this.SkinG[i]);
+            }
+        }
+        else {
+            this.skinlist = new eui.List();
+            this.SkinCollection = new eui.ArrayCollection();
+            for (var i = 0; i < this.SkinG.length; i++) {
+                this.SkinCollection.addItem(this.SkinG[i]);
+            }
+            this.skinlist.dataProvider = this.SkinCollection;
+            this.skinlist.itemRenderer = SkinListItem;
+            var layout = new eui.TileLayout();
+            layout.horizontalGap = 60;
+            layout.verticalGap = 20;
+            layout.paddingTop = 40;
+            layout.paddingLeft = 40;
+            layout.requestedRowCount = 2;
+            layout.requestedColumnCount = Math.round(this.SkinG.length / 2);
+            this.skinlist.layout = layout;
+            this.skinScoller.viewport = this.skinlist;
+            this.skinScoller.scrollPolicyV = eui.ScrollPolicy.OFF;
+            this.skinScoller.scrollPolicyH = eui.ScrollPolicy.ON;
+        }
     };
     //发送信息到服务端
-    BeginPage.prototype.Sendsocket = function (type, start) {
-        var cmd = '{"id":"' + this.id + '","type":"' + type + '","start":"' + start + '"}';
+    BeginPage.prototype.Sendsocket = function (type, start, skin) {
+        var cmd = '{"id":"' + this.id + '","type":"' + type + '","start":"' + start + '","skin":"' + skin + '"}';
         SceneManager.instance().webSocket.writeUTF(cmd);
     };
     //监听服务器回复
@@ -306,13 +421,13 @@ var BeginPage = (function (_super) {
                     case "通讯中":
                         //返回的信息为“通讯中”且开始匹配则向服务端发送加入房间请求	
                         if (this.ismatching) {
-                            this.Sendsocket("Joinin", "0");
+                            this.Sendsocket("Joinin", "0", "");
                         }
                         break;
                     case "进入房间":
                         //如果已经进入房间则向服务端发送开始游戏请求
                         this.Matching.visible = true;
-                        this.Sendsocket("Gaming", "1");
+                        this.Sendsocket("Gaming", "1", "");
                         break;
                     case "对方已准备":
                         //如果对方已经准备开始战斗则跳转到战斗界面
@@ -322,7 +437,7 @@ var BeginPage = (function (_super) {
                         break;
                     case "退出房间":
                         //如果已经退出房间则向服务端发送验证通信请求
-                        this.Sendsocket("Login", "0");
+                        this.Sendsocket("Login", "0", "");
                         break;
                     case "个人数据":
                         //接收到个人数据并把数据显示到UI上
@@ -350,7 +465,7 @@ var BeginPage = (function (_super) {
                         var MyId = selfdata.name;
                         var Myintegral = selfdata.integral;
                         this.ShowSelfRank(Myrank, MyId, Myintegral);
-                        this.Sendsocket("AllRank", "0");
+                        this.Sendsocket("AllRank", "0", "");
                         break;
                     case "总排行":
                         //记录当前人的排行
@@ -393,7 +508,23 @@ var BeginPage = (function (_super) {
                         break;
                     case "成就修改":
                         this.CloseAchieve();
-                        this.Sendsocket("Achieve", "get");
+                        this.Sendsocket("Achieve", "get", "");
+                        break;
+                    case "抽奖内容":
+                        this.SetAwardList(obj.data);
+                        this.AwardGroup.visible = true;
+                        break;
+                    case "皮肤内容":
+                        if (this.SkinLength == 0) {
+                            this.SkinLength = obj.status;
+                        }
+                        this.SkinG.push(obj.data);
+                        if (this.SkinG.length == this.SkinLength) {
+                            this.SkinLength = 0;
+                            this.SetSkinList();
+                            this.SkinG.splice(0, this.SkinG.length);
+                            this.SkinGroup.visible = true;
+                        }
                         break;
                 }
             }

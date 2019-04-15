@@ -230,9 +230,21 @@ private AddEvent(){
 	this.SkinBack.addEventListener(egret.TouchEvent.TOUCH_TAP,this.CloseSkin,this);
 	//开启皮肤面板
 	this.pifuBT.addEventListener(egret.TouchEvent.TOUCH_TAP,this.OpenSkin,this);
+	//替身皮肤按钮
+	this.SubSkin.addEventListener(egret.TouchEvent.TOUCH_TAP,this.OpenSubSkin,this);
+	//皮肤按钮
+	this.ManSkin.addEventListener(egret.TouchEvent.TOUCH_TAP,this.OpenSkin,this);
 }
 //移除所有事件
 private RemoveEvent(){
+	if(this.SubSkin.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.SubSkin.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.OpenSubSkin,this);
+	}
+	if(this.ManSkin.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
+		this.ManSkin.removeEventListener(egret.TouchEvent.TOUCH_TAP
+		,this.OpenSkin,this);
+	}
 	if(this.pifuBT.hasEventListener(egret.TouchEvent.TOUCH_TAP)){
 		this.pifuBT.removeEventListener(egret.TouchEvent.TOUCH_TAP
 		,this.OpenSkin,this);
@@ -302,9 +314,13 @@ private RemoveEvent(){
 		this.onReceiveMessage,this);
 	}
 }
+//开启替身皮肤面板
+private OpenSubSkin(){
+	this.Sendsocket("Skin","get","subskin");
+}
 //开启皮肤面板
 private OpenSkin(){
-	this.Sendsocket("Skin","get","sub");
+	this.Sendsocket("Skin","get","skin");
 }
 //关闭皮肤界面
 private CloseSkin(){
@@ -513,12 +529,18 @@ private SetSkinList(){
 			this.SkinCollection.addItem(this.SkinG[i]);
 		}
 		this.skinlist.dataProvider = this.SkinCollection;
+		this.skinlist.itemRenderer = SkinListItem;
 		var layout = new eui.TileLayout();
-		layout.horizontalGap = 40;
-		layout.verticalGap = 10;
+		layout.horizontalGap = 60;
+		layout.verticalGap = 20;
+		layout.paddingTop = 40;
+		layout.paddingLeft = 40;
 		layout.requestedRowCount = 2;
+		layout.requestedColumnCount = Math.round(this.SkinG.length/2);
+		this.skinlist.layout = layout;
 		this.skinScoller.viewport = this.skinlist;
 		this.skinScoller.scrollPolicyV = eui.ScrollPolicy.OFF;
+		this.skinScoller.scrollPolicyH = eui.ScrollPolicy.ON;
 	}
 }
 //发送信息到服务端
@@ -639,7 +661,9 @@ private onReceiveMessage(){
 			}
 			this.SkinG.push(obj.data);
 			if(this.SkinG.length == this.SkinLength){
+				this.SkinLength = 0;
 				this.SetSkinList();
+				this.SkinG.splice(0,this.SkinG.length);
 				this.SkinGroup.visible = true;
 			}
 			break;

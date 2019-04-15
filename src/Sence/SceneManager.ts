@@ -60,7 +60,6 @@ class SceneManager extends egret.Sprite {
 	}
 	//异常接收
 	private onSocketError(){
-
 	}
 	//断开监听
 	private onSocketClose(){
