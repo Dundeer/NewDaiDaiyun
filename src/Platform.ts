@@ -11,6 +11,8 @@ declare interface Platform {
     login(): Promise<any>
 
     share(): Promise<any>;
+
+    initiativeShare(): Promise<any>;
 }
 
 class DebugPlatform implements Platform {
@@ -23,6 +25,9 @@ class DebugPlatform implements Platform {
     async share(){
         
     } 
+    async initiativeShare(){
+
+    }
 }
 
 if (!window.platform) {

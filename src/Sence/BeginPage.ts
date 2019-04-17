@@ -136,7 +136,7 @@ class BeginPage extends eui.Component implements  eui.UIComponent {
 	//当前金币个数
 	public CurrentGold:number = 0;
 	//当前显示皮肤
-	private CurrentSkin = "skin";
+	public CurrentSkin = "skin";
 
 public constructor() {		
 	super();
@@ -158,7 +158,7 @@ private init(){
 	//添加事件
 	this.AddEvent();
 	//获取用户id
-	this.id = SceneManager.instance().myid;
+	this.id = SceneManager.instance().mynickName;
 	//关闭皮肤面板
 	this.CloseSkin();
 	//关闭金币提示面板
@@ -314,13 +314,19 @@ private RemoveEvent(){
 		this.onReceiveMessage,this);
 	}
 }
+//开启分享
+private initiativeShare(){
+	platform.initiativeShare();
+}
 //开启替身皮肤面板
 private OpenSubSkin(){
-	this.Sendsocket("Skin","get","subskin");
+	this.CurrentSkin = "subskin";
+	SceneManager.instance().Sendsocket("Skin","get","subskin");
 }
 //开启皮肤面板
 private OpenSkin(){
-	this.Sendsocket("Skin","get","skin");
+	this.CurrentSkin = "skin";
+	SceneManager.instance().Sendsocket("Skin","get","skin");
 }
 //关闭皮肤界面
 private CloseSkin(){
@@ -352,7 +358,7 @@ private CloseAward(){
 }
 //打开抽奖面板
 private OpenAward(){
-	this.Sendsocket("Award","get","");
+	SceneManager.instance().Sendsocket("Award","get","");
 }
 //关闭成就
 private CloseAchieve(){
@@ -362,7 +368,7 @@ private CloseAchieve(){
 }
 //开启成就
 private OpenAchieve(){
-	this.Sendsocket("Achieve","get","");	
+	SceneManager.instance().Sendsocket("Achieve","get","");	
 }
 //关闭排行榜
 private CloseRank(){
@@ -373,7 +379,7 @@ private CloseRank(){
 }
 //展示排行榜
 private OpenRank(){
-	this.Sendsocket("SelfRank","0","");
+	SceneManager.instance().Sendsocket("SelfRank","0","");
 }
 //关闭规则面板
 private CloseRule(){
@@ -389,7 +395,7 @@ private CloseRecord(){
 }
 //展示战绩
 private Record(){
-	this.Sendsocket("Selfshuju","cha","");
+	SceneManager.instance().Sendsocket("Selfshuju","cha","");
 }
 //开始ai对战
 private ai(){
@@ -402,7 +408,7 @@ private ai(){
 private BackBegin(){
 	this.Matching.visible = false;
 	this.ismatching = false;
-	this.Sendsocket("Quit","0","");	
+	SceneManager.instance().Sendsocket("Quit","0","");	
 }
 //开始匹配
 public matching(){
@@ -410,7 +416,7 @@ public matching(){
 	SceneManager.instance().isAI = false;
 	this.Matching.visible = true;
 	this.ismatching = true;	
-	this.Sendsocket("Login","0","");	
+	SceneManager.instance().Sendsocket("Login","0","");	
 }
 //使自己的战绩显示到UI中
 private ShowSelfShuju(winnumber:number,timesNubmer:number,integral:number){
@@ -510,7 +516,7 @@ private SetAwardList(awardData){
 }
 //换一盒
 private ChangeNewBox(){
-	this.Sendsocket("Award","restart","");
+	SceneManager.instance().Sendsocket("Award","restart","");
 }
 //设置皮肤列表
 private SetSkinList(){
@@ -543,11 +549,6 @@ private SetSkinList(){
 		this.skinScoller.scrollPolicyH = eui.ScrollPolicy.ON;
 	}
 }
-//发送信息到服务端
-private Sendsocket(type:string,start:string,skin:string){
-	var cmd = '{"id":"'+this.id+'","type":"'+type+'","start":"'+start+'","skin":"'+skin+'"}';
-	SceneManager.instance().webSocket.writeUTF(cmd);
-}
 //监听服务器回复
 private onReceiveMessage(){
 	//拿到服务端发送的数据
@@ -561,13 +562,13 @@ private onReceiveMessage(){
 			case "通讯中":
 			//返回的信息为“通讯中”且开始匹配则向服务端发送加入房间请求	
 			if(this.ismatching){
-				this.Sendsocket("Joinin","0","");
+				SceneManager.instance().Sendsocket("Joinin","0","");
 			}
 			break;
 			case "进入房间":
 			//如果已经进入房间则向服务端发送开始游戏请求
 			this.Matching.visible = true;	
-			this.Sendsocket("Gaming","1","");
+			SceneManager.instance().Sendsocket("Gaming","1","");
 			break;
 			case "对方已准备":
 			//如果对方已经准备开始战斗则跳转到战斗界面
@@ -577,7 +578,7 @@ private onReceiveMessage(){
 			break;
 			case "退出房间":
 			//如果已经退出房间则向服务端发送验证通信请求
-			this.Sendsocket("Login","0","");
+			SceneManager.instance().Sendsocket("Login","0","");
 			break;
 			case "个人数据":
 			//接收到个人数据并把数据显示到UI上
@@ -606,7 +607,7 @@ private onReceiveMessage(){
 			let Myintegral:number = selfdata.integral;
 			
 			this.ShowSelfRank(Myrank,MyId,Myintegral);
-			this.Sendsocket("AllRank","0","");
+			SceneManager.instance().Sendsocket("AllRank","0","");
 			break;
 			case "总排行":
 			//记录当前人的排行
@@ -649,7 +650,7 @@ private onReceiveMessage(){
 			break;
 			case "成就修改":
 			this.CloseAchieve();
-			this.Sendsocket("Achieve","get","");
+			SceneManager.instance().Sendsocket("Achieve","get","");
 			break;
 			case "抽奖内容":
 			this.SetAwardList(obj.data);

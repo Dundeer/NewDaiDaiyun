@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down,cheng3_png,cheng7_png,chou4_png,chou5_png,chou6_png,chou7_png,chou8_png,fang4_png,fang5_png,fang6_png,pi6_png,pi7_png,pi8_png,pi9_png,pi10_png,pi14_png,chou12_png,chou13_png,chou14_png",
+			"keys": "kong_png,man_png,Rule_png,shijiantiao_png,yunX_png,Background,yun,backBT,zhanji,BG1,BG2,BG3,zailaiyijuDown,zailaiyiju,renji1,renji_png,quan1,quan2,quan3,pipei,pipei1,gerenpaihang,zonghe,zonghe1,haoyou,haoyou1,guize,guize1,fenxiang,fang1,fang2,fang3,choujiang,pifu,chengjiu,biaoti_png,paihangbang,paihang,zhanjiTable,quan3down,quan1down,quan2down,cheng3_png,cheng7_png,chou4_png,chou5_png,chou6_png,chou7_png,chou8_png,fang4_png,fang5_png,fang6_png,pi6_png,pi7_png,pi8_png,pi9_png,pi10_png,pi14_png,chou12_png,chou13_png,chou14_png,weixinImage",
 			"name": "daidaiyun"
 		}
 	],
@@ -344,6 +344,11 @@
 			"url": "assets/daidaiyun/chou14.png",
 			"type": "image",
 			"name": "chou14_png"
+		},
+		{
+			"url": "assets/daidaiyun/weixinImage.png",
+			"type": "image",
+			"name": "weixinImage"
 		}
 	]
 }

@@ -131,7 +131,7 @@ private onReceiveMessage(){
 }
 //发送网络信息
 private SentSocket(touch:string,type:string,start:string,defense:number){
-	var id = SceneManager.instance().myid;
+	var id = SceneManager.instance().mynickName;
 	var cmd = '{"id":"'+id+'","type":"'+type+'","play":"' + touch + '","start":"'+start+'","def":"'+defense+'"}';
 	SceneManager.instance().webSocket.writeUTF(cmd);
 }

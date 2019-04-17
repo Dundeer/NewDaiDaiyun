@@ -69,7 +69,7 @@ class AchieveItemRender extends eui.Component implements  eui.IItemRenderer{
 	}
 	
 	private Sendsocket(start:string,achieve:string){
-		var cmd = '{"id":"'+SceneManager.instance().myid+'","type":"Achieve","start":"'+start+'","achieve":"'+achieve+'"}';
+		var cmd = '{"id":"'+SceneManager.instance().mynickName+'","type":"Achieve","start":"'+start+'","achieve":"'+achieve+'"}';
 		SceneManager.instance().webSocket.writeUTF(cmd);
 	}
 }

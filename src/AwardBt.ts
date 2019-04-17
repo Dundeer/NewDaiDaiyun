@@ -99,7 +99,7 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 	}
 
 	private Sendsocket(Button:number,award:string){
-		var cmd = '{"id":"'+SceneManager.instance().myid+'","type":"Award","start":"set","Button":"'+Button+'","award":"'+award+'"}';
+		var cmd = '{"id":"'+SceneManager.instance().mynickName+'","type":"Award","start":"set","Button":"'+Button+'","award":"'+award+'"}';
 		SceneManager.instance().webSocket.writeUTF(cmd);
 	}
 	

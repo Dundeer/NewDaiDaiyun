@@ -13,16 +13,18 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 	//当前单元的样式
 	private CurrentType:string;
 	//计时器
-	private timer:egret.Timer = new egret.Timer(1000);
+	private timer:egret.Timer;
 	//皮肤个数
 	private skinNumber:number;
 	//起始时间
 	private OldTime:number;
+	//皮肤样式
+	private skinType = SceneManager.instance().beginScene.CurrentSkin;
 
 	private _data:any;
 	public set data(data:any){
 		this._data = data;
-		this.updataView(data);
+		this.updateView(data);
 	}
 	public get data():any{
 		return this._data;
@@ -30,7 +32,9 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 	public selected:boolean;
 	public itemIndex:number;
 
-	private updataView(data:any){
+	//更新显示
+	private updateView(data:any)
+	{
 		this.CurrentType = data['type'];
 		let skinname:string = data['display'];
 		this.skinLabel.text = skinname;
@@ -40,14 +44,15 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 				this.shade.visible = false;
 				let skinTime:string = data[this.CurrentType + 'time'];
 				this.OldTime = (new Date(skinTime)).valueOf();
-				this.ComputationTime();
 				this.timer = new egret.Timer(1000,0);
-			    this.timer.addEventListener(egret.TimerEvent.TIMER,this.ComputationTime,this);
+			    this.timer.addEventListener(egret.TimerEvent.TIMER,this.timefun,this);
 			    this.timer.start();
 				if(this.CurrentType == data['CurrentSkin'] || this.CurrentType == data['CurrentSubSkin']){
 					this.skinBt.skinName = "BG2";
 				}
-			}else{
+			}
+			else
+			{
 				this.shade.visible = true;
 				this.skintimelabel.text = "";
 			}
@@ -57,9 +62,13 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 		}
 	}
 
+	private timefun(){
+		console.log("输出时间！");
+	}
+
 	//发送信息到服务端
-    private Sendsocket(start:string,skin:string){
-		var cmd = '{"id":"' + SceneManager.instance().myid +'","type":"Skin","start":"' + start + '","skin":"' + skin + '"}';
+    private Sendsocket(start:string,skin:string,skinType:string){
+		var cmd = '{"id":"' + SceneManager.instance().mynickName +'","type":"Skin","start":"' + start + '","skin":"' + skin + '","skinType":"' + skinType + '"}';
 		SceneManager.instance().webSocket.writeUTF(cmd);
 	}
 	
@@ -70,16 +79,20 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 		let NewTime:number = (new Date()).valueOf();//当前的时间
 		let diffValue:number = NewTime - this.OldTime;//到现在位置的时长
 		diffValue = diffValue / 1000;
-		if(diffValue > AllTime){
-			this.Sendsocket("set",this.CurrentType);
+		if(diffValue > AllTime)
+		{
 			this.skintimelabel.text = "";
 			this.shade.visible = true;
 			if(this.timer.running)
 			{
+				
+				this.Sendsocket("set",this.CurrentType,this.skinType);
 				console.log("到时间了");
 				this.timer.stop();
 			}
-		}else{
+		}
+		else
+		{
 			diffValue = AllTime - diffValue;
 			let timeString:string = "1";//返回一个x天x时x分x秒的一个时间
 			let day:number = Math.floor(diffValue / (24 * 3600));//天

@@ -62,21 +62,22 @@ class Main extends eui.UILayer {
     }
 
     private async runGame() {
-        await this.loadResource()
+        await this.loadResource();
         this.createGameScene();
-        await platform.login();
-        await platform.share();
+        const userdata = await platform.login();
+        console.log(userdata.code);
         const userInfo = await platform.getUserInfo();
-        console.log(userInfo.nickName); 
+        this.getUserinfo(userInfo,userdata.code);
+        await platform.share();
     }
     
     private async loadResource() {
         try {
-            const loadingView = new LoadingUI();
-            this.stage.addChild(loadingView);
             await RES.loadConfig("default.res.json", "http://192.168.0.21:8088/resource/");
             await this.loadTheme();
+            const loadingView = new LoadingUI();
             await RES.loadGroup("preload", 0);
+            this.stage.addChild(loadingView);
             await RES.loadGroup("daidaiyun",0,loadingView);
             this.stage.removeChild(loadingView);
         }
@@ -104,10 +105,13 @@ class Main extends eui.UILayer {
      */
     protected createGameScene(): void {
         this.addChild(SceneManager.instance());
+        
     }
 
-    protected getUserinfo(userInfo:any){
-        console.log(userInfo.avatarUrl)
+    protected getUserinfo(userInfo:any,code){
+        console.log(userInfo.nickName);
+        SceneManager.instance().myCode = code;
+        SceneManager.instance().mynickName = userInfo.nickName;
         SceneManager.instance().avatarUrl = userInfo.avatarUrl;
     }
     /**
