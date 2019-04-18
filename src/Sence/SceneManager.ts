@@ -25,7 +25,7 @@ class SceneManager extends egret.Sprite {
 	//本机id
 	public mynickName:string = "";
 	public myCode:string = "";
-	public myOpenId:string;
+	public myOpenId:string = null;
 	public avatarUrl:any = "";
 	public isRestart:boolean = false;
 	public constructor() {
@@ -51,10 +51,26 @@ class SceneManager extends egret.Sprite {
 		//添加异常监听
 		this.webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR,
 		this.onSocketError,this);
+		//数据接收的监听
+		this.webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA,this.onReceiveMessage,this);
 		//连接服务器
 		this.webSocket.connect(this.hostname,this.port);
-		//默认添加开始场景
-		this.addChild(this.beginScene);
+	}
+	//数据接收
+	private onReceiveMessage(){
+		//拿到服务端发送的数据
+		var msg = SceneManager.instance().webSocket.readUTF();
+		try{
+	        //将数据转换成json格式
+	        var obj = JSON.parse(msg);
+			console.log(obj);
+			this.webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA,this.onReceiveMessage,this);
+			//默认添加开始场景
+			this.addChild(this.beginScene);
+		}
+		catch(e){
+			console.log(e);
+		}
 	}
 	//连接完成时的方法
 	private onSocketOpen(){
@@ -80,16 +96,16 @@ class SceneManager extends egret.Sprite {
 	 * type gameScene/beginScene 
 	 */
 	public changeScene(type:string){
-	//移除所有界面	
-	this.removeChildren();
-	//初始化场景
-	if(type == "gameScene"){
-		this.gameScene = new GamePlay();
-		this.addChild(this.gameScene);
-	}else if(type == "beginScene"){
-		//添加下一个场景
-		this.beginScene = new BeginPage();
-		this.addChild(this[type]);
+		//移除所有界面	
+		this.removeChildren();
+		//初始化场景
+		if(type == "gameScene"){ 
+			this.gameScene = new GamePlay(); 
+			this.addChild(this.gameScene);
+		}else if(type == "beginScene"){
+			//添加下一个场景
+			this.beginScene = new BeginPage();
+			this.addChild(this[type]);
+		}
 	}
-}
 }

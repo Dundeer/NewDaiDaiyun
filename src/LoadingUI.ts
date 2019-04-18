@@ -29,37 +29,89 @@
 
 class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
 
-    public constructor() {
+    public constructor(Main:Main) {
         super();
+        this.Main = Main;
         this.addEventListener(egret.Event.ADDED_TO_STAGE,this.createView,this);
     }
-
+    private Main:Main;
     private textField: egret.TextField;
-    private BG:egret.Bitmap;//背景
-    private BGimage:egret.Bitmap;//小背景图片
-    private loadingImage:egret.Bitmap;//loading图标
+    private BG:egret.Bitmap;//加载大背景
+    private loadingBar:eui.ProgressBar;//滚动条
+    private Cursor:egret.Bitmap;//滚动条光标
+    private StartGame:eui.Button;
+    private frame:number = 1;
+    private timer:egret.Timer = new egret.Timer(20,100);
     private async createView(){
         this.width = this.stage.stageWidth;
         this.height = this.stage.stageHeight;
 
         //加载大背景
         this.BG = new egret.Bitmap();
-        this.BG.texture = RES.getRes('loading_jpg');
+        this.BG.texture = RES.getRes('fireBG_jpg');
         this.BG.width = this.width;
         this.BG.height = this.height;
         this.addChild(this.BG);
-        
-        this.textField = new egret.TextField();
-        this.textField.visible = false;
-        this.addChild(this.textField);
-        this.textField.width = 480;
-        this.textField.height = 20;
-        this.textField.y = this.height / 2 - this.textField.height / 2;
-        this.textField.size = 14;
-        this.textField.textAlign = "center";
+        //加载进度条
+        this.loadingBar = new eui.ProgressBar();
+        this.loadingBar.width = this.width * ( 2 / 3 );
+        this.loadingBar.height = 120;
+        this.loadingBar.y = this.height / 2 - this.loadingBar.height / 2;
+        this.loadingBar.x = this.width / 2 - this.loadingBar.width / 2;
+        this.loadingBar.maximum = 100;
+        this.loadingBar.minimum = 0;
+        this.loadingBar.value = 0;
+        this.addChild(this.loadingBar);
+        //加载光标
+        this.Cursor = new egret.Bitmap();
+        this.Cursor.texture = RES.getRes('bi1_png');
+        this.Cursor.width = this.loadingBar.height * 0.8;
+        this.Cursor.height = this.loadingBar.height * 0.8;
+        this.Cursor.x = this.loadingBar.x;
+        this.Cursor.y = this.loadingBar.y;
+        this.addChild(this.Cursor);
+        this.timer.addEventListener(egret.TimerEvent.TIMER,this.FrameAnima,this);
+        this.timer.start();
+        //添加按钮
+        this.StartGame = new eui.Button();
+        this.StartGame.label = "";
+        this.StartGame.width = this.width / 3;
+        this.StartGame.height = this.height / 10;
+        this.StartGame.y = this.height * ( 3 / 4) + this.StartGame.height / 2;
+        this.StartGame.x = this.width / 2 - this.StartGame.width / 2;
+        this.StartGame.icon = 'kaishiyouxi1_png';
+        this.StartGame.addEventListener(egret.TouchEvent.TOUCH_TAP,this.PlayingGame,this);
     }
 
     public onProgress(current: number, total: number): void {
-        this.textField.text = `Loading...${current}/${total}`;
+        var value:number = Math.floor((current / total) * 100);
+        this.loadingBar.value = value;
+    }
+
+    private FrameAnima(){
+        let value:number = this.loadingBar.value / 100;
+        if(value == 1)
+        {
+            this.timer.stop();
+            this.Cursor.x = this.loadingBar.x + this.loadingBar.width - ( this.Cursor.width / 2 );
+            this.Cursor.texture = RES.getRes('bi1_png');
+            this.addChild(this.StartGame);
+        }
+        else
+        {
+            this.frame++;
+            if(this.frame > 4)
+            {
+                this.frame = 1;
+            }
+            var CurX = this.loadingBar.x + (value * this.loadingBar.width);
+            this.Cursor.x = CurX;
+            this.Cursor.texture = RES.getRes('bi' + this.frame + '_png');
+        }
+    }
+
+    private PlayingGame(){
+        this.Main.stage.removeChild(this);
+        this.Main.createGameScene();
     }
 }

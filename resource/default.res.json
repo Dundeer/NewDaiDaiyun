@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "button_down_png,button_up_png,bg_jpg,description_json,roundthumb_png,track_sb_png",
+			"keys": "button_down_png,button_up_png,bg_jpg,description_json,roundthumb_png,track_sb_png,jindu_png,qianbi_png,xiao_png,di_png,fireBG_jpg,bi2_png,bi3_png,bi4_png,bi1_png,kaishiyouxi1_png",
 			"name": "preload"
 		},
 		{
@@ -349,6 +349,56 @@
 			"url": "assets/daidaiyun/weixinImage.png",
 			"type": "image",
 			"name": "weixinImage"
+		},
+		{
+			"name": "jindu_png",
+			"type": "image",
+			"url": "assets/jindu.png"
+		},
+		{
+			"name": "qianbi_png",
+			"type": "image",
+			"url": "assets/qianbi.png"
+		},
+		{
+			"name": "xiao_png",
+			"type": "image",
+			"url": "assets/xiao.png"
+		},
+		{
+			"name": "di_png",
+			"type": "image",
+			"url": "assets/di.png"
+		},
+		{
+			"name": "fireBG_jpg",
+			"type": "image",
+			"url": "assets/fireBG.jpg"
+		},
+		{
+			"name": "bi2_png",
+			"type": "image",
+			"url": "assets/bi2.png"
+		},
+		{
+			"name": "bi3_png",
+			"type": "image",
+			"url": "assets/bi3.png"
+		},
+		{
+			"name": "bi4_png",
+			"type": "image",
+			"url": "assets/bi4.png"
+		},
+		{
+			"name": "bi1_png",
+			"type": "image",
+			"url": "assets/bi1.png"
+		},
+		{
+			"name": "kaishiyouxi1_png",
+			"type": "image",
+			"url": "assets/kaishiyouxi1.png"
 		}
 	]
 }

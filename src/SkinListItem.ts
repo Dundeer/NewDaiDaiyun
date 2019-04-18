@@ -13,7 +13,7 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 	//当前单元的样式
 	private CurrentType:string;
 	//计时器
-	private timer:egret.Timer;
+	private timer:egret.Timer = new egret.Timer(1000,1000);
 	//皮肤个数
 	private skinNumber:number;
 	//起始时间
@@ -45,7 +45,7 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 				let skinTime:string = data[this.CurrentType + 'time'];
 				this.OldTime = (new Date(skinTime)).valueOf();
 				this.timer = new egret.Timer(1000,0);
-			    this.timer.addEventListener(egret.TimerEvent.TIMER,this.timefun,this);
+			    this.timer.addEventListener(egret.TimerEvent.TIMER,this.ComputationTime,this);
 			    this.timer.start();
 				if(this.CurrentType == data['CurrentSkin'] || this.CurrentType == data['CurrentSubSkin']){
 					this.skinBt.skinName = "BG2";
@@ -60,10 +60,6 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 			this.shade.visible = false;
 			this.skintimelabel.text = "";
 		}
-	}
-
-	private timefun(){
-		console.log("输出时间！");
 	}
 
 	//发送信息到服务端
@@ -85,7 +81,6 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 			this.shade.visible = true;
 			if(this.timer.running)
 			{
-				
 				this.Sendsocket("set",this.CurrentType,this.skinType);
 				console.log("到时间了");
 				this.timer.stop();

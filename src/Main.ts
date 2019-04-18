@@ -63,7 +63,6 @@ class Main extends eui.UILayer {
 
     private async runGame() {
         await this.loadResource();
-        this.createGameScene();
         const userdata = await platform.login();
         console.log(userdata.code);
         const userInfo = await platform.getUserInfo();
@@ -73,13 +72,13 @@ class Main extends eui.UILayer {
     
     private async loadResource() {
         try {
+            const loadingView = new LoadingUI(this);
             await RES.loadConfig("default.res.json", "http://192.168.0.21:8088/resource/");
             await this.loadTheme();
-            const loadingView = new LoadingUI();
             await RES.loadGroup("preload", 0);
             this.stage.addChild(loadingView);
             await RES.loadGroup("daidaiyun",0,loadingView);
-            this.stage.removeChild(loadingView);
+            //this.stage.removeChild(loadingView);
         }
         catch (e) {
             console.error(e);
@@ -103,12 +102,11 @@ class Main extends eui.UILayer {
      * 创建场景界面
      * Create scene interface
      */
-    protected createGameScene(): void {
+    public createGameScene(): void {
         this.addChild(SceneManager.instance());
-        
     }
 
-    protected getUserinfo(userInfo:any,code){
+    private getUserinfo(userInfo:any,code){
         console.log(userInfo.nickName);
         SceneManager.instance().myCode = code;
         SceneManager.instance().mynickName = userInfo.nickName;
