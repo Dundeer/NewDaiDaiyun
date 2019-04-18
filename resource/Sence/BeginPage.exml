@@ -114,7 +114,7 @@
 			</e:skinName>
 		</e:Button>
 	</e:Group>
-	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="RankingGroup" left="0" right="0" top="0" bottom="0">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image width="600" height="180" x="240" y="-20" anchorOffsetX="0" anchorOffsetY="0" source="paihang"/>
@@ -234,7 +234,7 @@
 			<e:Button id="goldhintConfirm" label="确定" x="556" y="920" anchorOffsetX="0" width="164" anchorOffsetY="0" height="82"/>
 		</e:Group>
 	</e:Group>
-	<e:Group id="SkinGroup" left="0" right="0" top="0" bottom="0">
+	<e:Group id="SkinGroup" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG2"/>
 		<e:Image left="0" right="0" top="0" bottom="0" source="BG3"/>
 		<e:Image width="600" height="180" x="240" y="-20" source="pi6_png"/>

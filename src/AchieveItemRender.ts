@@ -56,8 +56,9 @@ class AchieveItemRender extends eui.Component implements  eui.IItemRenderer{
 			break;
 		}
 		this.Achievejincheng.text = fenzi.toString() + "/" + fenmu.toString();
-		this.AchieveBT.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-			this.Sendsocket("set",this._data.type);
+		this.AchieveBT.addEventListener(egret.TouchEvent.TOUCH_TAP,function()
+		{
+			this.Sendsocket();
 		},this);
 		if(fenzi >= fenmu){
 			this.AchieveBT.label = "可领取";
@@ -68,8 +69,7 @@ class AchieveItemRender extends eui.Component implements  eui.IItemRenderer{
 		}
 	}
 	
-	private Sendsocket(start:string,achieve:string){
-		var cmd = '{"id":"'+SceneManager.instance().mynickName+'","type":"Achieve","start":"'+start+'","achieve":"'+achieve+'"}';
-		SceneManager.instance().webSocket.writeUTF(cmd);
+	private Sendsocket(){
+		SceneManager.instance().Sendsocket("Achieve","set","",-1,"",this._data.type);
 	}
 }

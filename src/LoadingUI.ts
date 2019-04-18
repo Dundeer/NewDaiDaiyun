@@ -41,7 +41,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private Cursor:egret.Bitmap;//滚动条光标
     private StartGame:eui.Button;
     private frame:number = 1;
-    private timer:egret.Timer = new egret.Timer(20,100);
+    private timer:egret.Timer = new egret.Timer(41,100);
     private async createView(){
         this.width = this.stage.stageWidth;
         this.height = this.stage.stageHeight;
@@ -72,15 +72,6 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
         this.addChild(this.Cursor);
         this.timer.addEventListener(egret.TimerEvent.TIMER,this.FrameAnima,this);
         this.timer.start();
-        //添加按钮
-        this.StartGame = new eui.Button();
-        this.StartGame.label = "";
-        this.StartGame.width = this.width / 3;
-        this.StartGame.height = this.height / 10;
-        this.StartGame.y = this.height * ( 3 / 4) + this.StartGame.height / 2;
-        this.StartGame.x = this.width / 2 - this.StartGame.width / 2;
-        this.StartGame.icon = 'kaishiyouxi1_png';
-        this.StartGame.addEventListener(egret.TouchEvent.TOUCH_TAP,this.PlayingGame,this);
     }
 
     public onProgress(current: number, total: number): void {
@@ -95,7 +86,6 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
             this.timer.stop();
             this.Cursor.x = this.loadingBar.x + this.loadingBar.width - ( this.Cursor.width / 2 );
             this.Cursor.texture = RES.getRes('bi1_png');
-            this.addChild(this.StartGame);
         }
         else
         {
@@ -108,10 +98,5 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
             this.Cursor.x = CurX;
             this.Cursor.texture = RES.getRes('bi' + this.frame + '_png');
         }
-    }
-
-    private PlayingGame(){
-        this.Main.stage.removeChild(this);
-        this.Main.createGameScene();
     }
 }

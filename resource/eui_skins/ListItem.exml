@@ -3,7 +3,7 @@
 	<w:Config id="169bdfcffcb" ></w:Config>
 	<e:Image source="gerenpaihang" anchorOffsetX="0" left="-52" right="-40" top="-45" bottom="-39" anchorOffsetY="0" scale9Grid="18,4,736,279"/>
 	<e:Label id="RankLabel" text="1" x="0" y="0" width="200" height="200" textColor="0x000000" verticalAlign="middle" textAlign="center" anchorOffsetY="0" anchorOffsetX="0" size="50"/>
-	<e:Image width="200" height="200" x="200" y="0" source="bg_jpg" anchorOffsetY="0"/>
-	<e:Label id="IDLabel" text="wodemingzi" x="420" y="0" width="200" height="200" textColor="0x000000" verticalAlign="middle" textAlign="center" anchorOffsetY="0" size="35"/>
+	<e:Image id="headImage" width="200" height="200" x="200" y="0" source="bg_jpg" anchorOffsetY="0"/>
+	<e:Label id="UserName" text="wodemingzi" x="420" y="0" width="200" height="200" textColor="0x000000" verticalAlign="middle" textAlign="center" anchorOffsetY="0" size="35"/>
 	<e:Label id="integralLabel" text="1000" x="640" y="0" width="200" height="200" verticalAlign="middle" textAlign="center" textColor="0x000000" size="35"/>
 </e:Skin>

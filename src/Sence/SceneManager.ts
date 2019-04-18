@@ -25,7 +25,7 @@ class SceneManager extends egret.Sprite {
 	//本机id
 	public mynickName:string = "";
 	public myCode:string = "";
-	public myOpenId:string = null;
+	public myOpenId:string = "";
 	public avatarUrl:any = "";
 	public isRestart:boolean = false;
 	public constructor() {
@@ -59,11 +59,12 @@ class SceneManager extends egret.Sprite {
 	//数据接收
 	private onReceiveMessage(){
 		//拿到服务端发送的数据
-		var msg = SceneManager.instance().webSocket.readUTF();
+		var msg = this.webSocket.readUTF();
 		try{
 	        //将数据转换成json格式
 	        var obj = JSON.parse(msg);
-			console.log(obj);
+			this.myOpenId = obj.data.Openid;
+			console.log(this.myOpenId);
 			this.webSocket.removeEventListener(egret.ProgressEvent.SOCKET_DATA,this.onReceiveMessage,this);
 			//默认添加开始场景
 			this.addChild(this.beginScene);
@@ -87,9 +88,10 @@ class SceneManager extends egret.Sprite {
 		this.webSocket.connect(this.hostname,this.port);
 	}
 	//发送信息到服务端
-	public Sendsocket(type:string = "",start:string = "",skin:string = ""){
-		var cmd = '{"id":"'+this.myOpenId+'","code":"' + this.myCode + '","type":"'+type+'","start":"'+start+'","skin":"'+skin+'"}';
-		SceneManager.instance().webSocket.writeUTF(cmd);
+	public Sendsocket(type:string = "",start:string = "",skin:string = "",Button:number = -1,award:string = "",achieve:string = "",skinType:string = ""){
+		var cmd = '{"id":"' + this.myOpenId + '","code":"' + this.myCode + '","name":"' + this.mynickName + '","head":"' + this.avatarUrl +'","type":"'+type+'",'+
+		'"start":"'+start+'","skin":"'+skin+'","Button":"' + Button + '","award":"' + award + '","achieve":"' + achieve + '","skinType":"' + skinType + '"}';
+		this.webSocket.writeUTF(cmd);
 	}
 	//切换场景
 	/**

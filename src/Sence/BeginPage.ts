@@ -439,6 +439,7 @@ private ShowSelfShuju(winnumber:number,timesNubmer:number,integral:number){
 }
 //在排行中显示自己的数据
 private ShowSelfRank(rank:number,id:string,integral:number){
+	this.MyHead.source = SceneManager.instance().avatarUrl;
 	this.MyRankTable.text = rank.toString();
 	this.MyIDLabel.text = id;
 	this.MyIntegralLable.text = integral.toString();
@@ -581,8 +582,6 @@ private onReceiveMessage(){
 			SceneManager.instance().Sendsocket("Login","0","");
 			break;
 			case "个人数据":
-			//接收到个人数据并把数据显示到UI上
-			console.log(obj.data);
 			//获取到信息中的数据
 			var str = obj.data;
 			//获取到数据中的胜场
@@ -625,7 +624,8 @@ private onReceiveMessage(){
 			let RankData = {
 				Rank:this.CurrentRankNumber,
 				ID:Alldata.name,
-				integral:Alldata.integral
+				integral:Alldata.integral,
+				head:Alldata.head
 			}
 			//将数据记录
 			this.let.push(RankData);

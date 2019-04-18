@@ -28,6 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Main extends eui.UILayer {
+    private view:any;
     public static contentScaleFullWidth:number = 0;
     public static contentScaleFullHeight:number = 0;
 
@@ -67,18 +68,19 @@ class Main extends eui.UILayer {
         console.log(userdata.code);
         const userInfo = await platform.getUserInfo();
         this.getUserinfo(userInfo,userdata.code);
+        this.createGameScene();
         await platform.share();
     }
     
     private async loadResource() {
         try {
             const loadingView = new LoadingUI(this);
+            this.view = loadingView;
             await RES.loadConfig("default.res.json", "http://192.168.0.21:8088/resource/");
             await this.loadTheme();
             await RES.loadGroup("preload", 0);
             this.stage.addChild(loadingView);
             await RES.loadGroup("daidaiyun",0,loadingView);
-            //this.stage.removeChild(loadingView);
         }
         catch (e) {
             console.error(e);
@@ -103,6 +105,7 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     public createGameScene(): void {
+        this.stage.removeChild(this.view);
         this.addChild(SceneManager.instance());
     }
 

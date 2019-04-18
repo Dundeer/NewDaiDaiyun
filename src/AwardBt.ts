@@ -64,7 +64,7 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 				break;
 			}
 			SceneManager.instance().beginScene.OpenPrize(prizeStr);
-			this.Sendsocket(this.itemIndex,jackpotStr);
+			SceneManager.instance().Sendsocket("Award","set","",this.itemIndex,jackpotStr);
 		}else{
 			SceneManager.instance().beginScene.OpenGoldHint();
 		}
@@ -96,11 +96,6 @@ class AwardBt extends eui.Component implements  eui.IItemRenderer {
 				this.jackpot.push('subskin'+m.toString());
 			}
 		}
-	}
-
-	private Sendsocket(Button:number,award:string){
-		var cmd = '{"id":"'+SceneManager.instance().mynickName+'","type":"Award","start":"set","Button":"'+Button+'","award":"'+award+'"}';
-		SceneManager.instance().webSocket.writeUTF(cmd);
 	}
 	
 }

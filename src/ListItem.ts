@@ -2,9 +2,11 @@ class ListItem extends eui.Component implements eui.IItemRenderer{
 	//排名
 	public RankLabel:eui.Label;
 	//ID
-	public IDLabel:eui.Label;
+	public UserName:eui.Label;
 	//积分
 	public integralLabel:eui.Label;
+	//头像
+	public headImage:eui.Image;
 
 	private _data:any;
 	public set data(data:any){
@@ -21,8 +23,10 @@ class ListItem extends eui.Component implements eui.IItemRenderer{
 	}
 
 	private updataView(data:any){
+		console.log(data);
+		this.headImage.source = data.head;
 		this.RankLabel.text = data.Rank;
-		this.IDLabel.text = data.ID;
+		this.UserName.text = data.ID;
 		this.integralLabel.text = data.integral;
 	}
 }

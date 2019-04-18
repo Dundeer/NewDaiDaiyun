@@ -64,8 +64,7 @@ class SkinListItem extends eui.Component implements  eui.IItemRenderer {
 
 	//发送信息到服务端
     private Sendsocket(start:string,skin:string,skinType:string){
-		var cmd = '{"id":"' + SceneManager.instance().mynickName +'","type":"Skin","start":"' + start + '","skin":"' + skin + '","skinType":"' + skinType + '"}';
-		SceneManager.instance().webSocket.writeUTF(cmd);
+		SceneManager.instance().Sendsocket("Skin",start,skin,-1,"","",skinType);
 	}
 	
 	//计算时间(几天，起始时间)
